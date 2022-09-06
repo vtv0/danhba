@@ -22,20 +22,20 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var myTable: UITableView!
     var DSTen:[Person] = [
-        Person(id: "0", images: "", name: "nhu", phonenumber: "000", email: "nhu000@.com", company: "aa", dateofbirth:  "08/08/2022"),
-        Person(id: "1", images: "", name: "lan", phonenumber: "111", email: "lan111@.com", company: "bb", dateofbirth: "07/08/2022"),
-        Person(id: "2", images: "", name: "an", phonenumber: "222", email: "ba0@333.com", company: "baba0", dateofbirth: "04/08/2022"),
-        Person(id: "3", images: "", name: "ba", phonenumber: "333", email: "ba1@333.com", company: "baba1", dateofbirth: "24/08/2022"),
-        Person(id: "4", images: "", name: "nang", phonenumber: "444", email: "ba2@333.com", company: "baba2", dateofbirth: "14/08/2022"),
-        Person(id: "5", images: "", name: "bang", phonenumber: "555", email: "ba3@333.com", company: "baba3" , dateofbirth: "04/08/2022"),
-        Person(id: "6", images: "", name: "tu", phonenumber: "666", email: "ba4@333.com", company: "baba4", dateofbirth: "04/08/2022"),
-        Person(id: "7", images: "", name: "tung", phonenumber: "777", email: "ba5@333.com", company: "baba5", dateofbirth: "04/08/2022"),
-        Person(id: "8", images: "", name: "ha", phonenumber: "888", email: "ha@010.com", company: "b1b1", dateofbirth: "01/08/2022"),
-        Person(id: "9", images: "", name: "hang", phonenumber: "999", email: "bon@444.com", company: "bbb", dateofbirth: "04/08/2022"),
-        Person(id: "10", images: "", name: "hung", phonenumber: "1010", email: "nam55@.com", company: "nnn", dateofbirth: "02/08/2022"),
-        Person(id: "11", images: "", name: "linh", phonenumber: "1111", email: "f88@.com", company: "tam", dateofbirth: "05/08/2022"),
-        Person(id: "12", images: "", name: "luan", phonenumber: "1212", email: "luan@999.com", company: "bang", dateofbirth: "06/08/2022"),
-        Person(id: "13", images: "", name: "sau", phonenumber: "1313", email: "sau@666.com", company: "zzz", dateofbirth: "09/08/2022")
+        Person(id: "0", images: "", name: "nhu", phoneNumber: [PhoneRow(phoneNumber: "0000", phoneType: "diđộng", displayStatus: true)], email: "nhu000@.com", company: "aa", dateOfBirth:  "08/08/2022"),
+        Person(id: "1", images: "", name: "lan", phoneNumber: [PhoneRow(phoneNumber: "0011", phoneType: "nhà", displayStatus: true)], email: "lan111@.com", company: "bb", dateOfBirth: "07/08/2022"),
+        Person(id: "2", images: "", name: "an", phoneNumber: [PhoneRow(phoneNumber: "0022", phoneType: "chính", displayStatus: true)], email: "ba0@333.com", company: "baba0", dateOfBirth: "04/08/2022"),
+        Person(id: "3", images: "", name: "ba", phoneNumber: [PhoneRow(phoneNumber: "0033", phoneType: "công ty", displayStatus: true)], email: "ba1@333.com", company: "baba1", dateOfBirth: "24/08/2022"),
+        Person(id: "4", images: "", name: "nang", phoneNumber: [PhoneRow(phoneNumber: "0044", phoneType: "diđộng", displayStatus: true)], email: "ba2@333.com", company: "baba2", dateOfBirth: "14/08/2022"),
+        Person(id: "5", images: "", name: "bang", phoneNumber: [PhoneRow(phoneNumber: "0055", phoneType: "diđộng", displayStatus: true)], email: "ba3@333.com", company: "baba3" , dateOfBirth: "04/08/2022"),
+        Person(id: "6", images: "", name: "tu", phoneNumber: [PhoneRow(phoneNumber: "0066", phoneType: "diđộng", displayStatus: true)], email: "ba4@333.com", company: "baba4", dateOfBirth: "04/08/2022"),
+        Person(id: "7", images: "", name: "tung", phoneNumber: [PhoneRow(phoneNumber: "0077", phoneType: "diđộng", displayStatus: true)], email: "ba5@333.com", company: "baba5", dateOfBirth: "04/08/2022"),
+        Person(id: "8", images: "", name: "ha", phoneNumber: [PhoneRow(phoneNumber: "0088", phoneType: "diđộng", displayStatus: true)], email: "ha@010.com", company: "b1b1", dateOfBirth: "01/08/2022"),
+        Person(id: "9", images: "", name: "hang", phoneNumber: [PhoneRow(phoneNumber: "0099", phoneType: "diđộng", displayStatus: true)], email: "bon@444.com", company: "bbb", dateOfBirth: "04/08/2022"),
+        Person(id: "10", images: "", name: "hung", phoneNumber: [PhoneRow(phoneNumber: "1010", phoneType: "diđộng", displayStatus: true)], email: "nam55@.com", company: "nnn", dateOfBirth: "02/08/2022"),
+        Person(id: "11", images: "", name: "linh", phoneNumber: [PhoneRow(phoneNumber: "1111", phoneType: "diđộng", displayStatus: true)], email: "f88@.com", company: "tam", dateOfBirth: "05/08/2022"),
+        Person(id: "12", images: "", name: "luan", phoneNumber: [PhoneRow(phoneNumber: "1212", phoneType: "diđộng", displayStatus: false)], email: "luan@999.com", company: "bang", dateOfBirth: "06/08/2022"),
+        
     ]
     // var titles: [String] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
     
@@ -73,7 +73,8 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.willEnterForeground(_:)),
                                                name: Notification.Name("TestNotification"),
-                                               object: nil);
+                                               object: nil
+        )
         
         //cột nhận tín hiệu từ MH ThemMoi
         NotificationCenter.default.addObserver(self,
@@ -95,14 +96,11 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     
     //chuyển đến classAddNew
     @objc private func willEnter(_ notification : Notification) {
-        print("co notification",notification.object)
-        let details:Person = (notification.object as? Person)!
-        print("222a: \(details.Name)")
+        let details:Person = (notification.userInfo!["details"] as? Person)!
         
-        let details2 = notification.userInfo?["details"] as? Person
-        if details2 != nil {
-            self.classAddNew(with: details2!)
-        }
+        //if details != nil {
+        self.classAddNew(with: details)
+        //}
         
         
     }
@@ -151,11 +149,13 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     //  hiển thị ra = số lượng chữ cái trong bảng đếm được
     func numberOfSections(in tableView: UITableView) -> Int { //khai báo số lượng section
         //yêu cầu nguồn dữ liệu trả về số lượng section trong chế độ tableView
+        
         return  sectionTitle.count
     }
     
     //tao ra cac Section Header là a, b ,c ,...
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
         return sectionTitle[section]
     }
     
@@ -172,9 +172,8 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
            let cell = sender as? UITableViewCell,
            let indexPath = myTable.indexPath(for: cell) {
             let items = searchDS[sectionTitle[indexPath.section]] ?? []
-            vc.item = items[indexPath.row]
-            
-            print(vc.item)
+            let item:Person = items[indexPath.row]
+            vc.item = item
             
             //vc.listDelegrate = self
         }
@@ -204,6 +203,7 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
                     tenDict[String(_prefixName)] = []
                 }
                 tenDict[String(_prefixName)]?.append(_person)
+                
             }
             searchDS = tenDict
             
@@ -212,22 +212,26 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     }
     
     //hàm thực thi việc sửa từ MHSua12
-    func classListUpdate2(with newPerson: Person) -> Bool {
-        print("co vao")
-        for _person in DSTen {
-            if _person.ID == newPerson.ID {
-                _person.Images = newPerson.Images
-                _person.Name = newPerson.Name
-                _person.PhoneNumber = newPerson.PhoneNumber
-                _person.Email = newPerson.Email
-                _person.DateOfBirth = newPerson.DateOfBirth
-                _person.Company = newPerson.Company
+    func classListUpdate2(with details: Person) -> Bool {
+        print("co vao11", details.Name, details.ID)
+        
+        for person in DSTen {
+            if person.ID == details.ID {
+                person.Images = details.Images
+                person.Name = details.Name
+                person.PhoneNumber = details.PhoneNumber
+                person.Email = details.Email
+                person.DateOfBirth = details.DateOfBirth
+                person.Company = details.Company
+                break
             }
         }
         
+        //        let d: Person = DSTen.filter({$0.ID == details.ID}).first!
+        //        print("axbx", d.Name)
+        
         tenDict = [String: [Person]]()
         searchDS = [String: [Person]]()
-        
         for _person in DSTen {
             let _prefixName = _person.Name.prefix(1).lowercased()
             if (!tenDict.keys.contains(String(_prefixName))) {
@@ -240,7 +244,7 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         //xếp tên theo kí tự        //var sectionTitle = [String]()
         sectionTitle = searchDS.keys.sorted()
         sectionTitle.sort()
-        self.myTable.reloadData()
+        myTable.reloadData()
         
         return true
     }
@@ -283,7 +287,7 @@ extension ViewController: UISearchBarDelegate {
                     searchDS[keyD] = [Person]()    // thì gán key trong SearchDS là một mảng Person
                 }
                 for _person in valueD {
-                    if (_person.Name.lowercased().contains(searchText.lowercased())) || (_person.PhoneNumber.contains(searchText)) {
+                    if (_person.Name.lowercased().contains(searchText.lowercased())) /*|| (_person.PhoneNumber.contains(searchText)) */{
                         searchDS[keyD]?.append(_person)
                     }
                     //                    if tenDict.contains(searchText.lowercased()) {  //không phân biệt chữ hoa hay thường trong SearchBar

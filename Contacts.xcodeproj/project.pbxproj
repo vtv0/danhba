@@ -27,7 +27,7 @@
 		75D6DEDF288659CB008E3970 /* ContactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D6DEDE288659CB008E3970 /* ContactsUITests.swift */; };
 		75D6DEE1288659CB008E3970 /* ContactsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D6DEE0288659CB008E3970 /* ContactsUITestsLaunchTests.swift */; };
 		75D9800D2898D96600968597 /* MH2ViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D9800C2898D96600968597 /* MH2ViewCell.swift */; };
-		75DD879528A0CBC800DEA020 /* ArrContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD879428A0CBC800DEA020 /* ArrContact.swift */; };
+		75DD879528A0CBC800DEA020 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DD879428A0CBC800DEA020 /* Person.swift */; };
 		75E8762B289CBB5500DCFE0B /* MH1DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8762A289CBB5500DCFE0B /* MH1DetailVC.swift */; };
 		75F2A64328B709C50063D16A /* CellName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A64228B709C50063D16A /* CellName.swift */; };
 		75F2A64528B70B090063D16A /* CellPhoneAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2A64428B70B090063D16A /* CellPhoneAdd.swift */; };
@@ -80,7 +80,7 @@
 		75D6DEDE288659CB008E3970 /* ContactsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUITests.swift; sourceTree = "<group>"; };
 		75D6DEE0288659CB008E3970 /* ContactsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		75D9800C2898D96600968597 /* MH2ViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MH2ViewCell.swift; sourceTree = "<group>"; };
-		75DD879428A0CBC800DEA020 /* ArrContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrContact.swift; sourceTree = "<group>"; };
+		75DD879428A0CBC800DEA020 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		75E8762A289CBB5500DCFE0B /* MH1DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MH1DetailVC.swift; sourceTree = "<group>"; };
 		75F2A64228B709C50063D16A /* CellName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellName.swift; sourceTree = "<group>"; };
 		75F2A64428B70B090063D16A /* CellPhoneAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPhoneAdd.swift; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 				75D6DEC8288659CB008E3970 /* LaunchScreen.storyboard */,
 				75D6DECB288659CB008E3970 /* Info.plist */,
 				75D6DEC3288659CA008E3970 /* Main.storyboard */,
-				75DD879428A0CBC800DEA020 /* ArrContact.swift */,
+				75DD879428A0CBC800DEA020 /* Person.swift */,
 				75CE337928B5BD4C004386C3 /* AssetMH1.swift */,
 			);
 			path = Contacts;
@@ -394,7 +394,7 @@
 				75D9800D2898D96600968597 /* MH2ViewCell.swift in Sources */,
 				75F2A64D28B70CAC0063D16A /* CellDofB.swift in Sources */,
 				75BAC9BC28AB435300E7EA55 /* SuaVC12.swift in Sources */,
-				75DD879528A0CBC800DEA020 /* ArrContact.swift in Sources */,
+				75DD879528A0CBC800DEA020 /* Person.swift in Sources */,
 				75CB6006289BDB9700ECB28A /* DongMH1Cell.swift in Sources */,
 				75F2A64528B70B090063D16A /* CellPhoneAdd.swift in Sources */,
 				75E8762B289CBB5500DCFE0B /* MH1DetailVC.swift in Sources */,

@@ -7,9 +7,9 @@
 
 import UIKit
 
-protocol Update2ContactAfterProtocol: class {
-    func classListUpdate2( with detailPerson: Person)
-}
+//protocol Update2ContactAfterProtocol: class {
+//    func classListUpdate2( with detailPerson: Person)
+//}
 
 class MH1DetailVC: UIViewController , UITableViewDataSource  {
     var selectedImage: UIImage!
@@ -17,21 +17,11 @@ class MH1DetailVC: UIViewController , UITableViewDataSource  {
     var documentsURL: URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
-
-
+    
+    
     @IBOutlet weak var myTable: UITableView!
     
     @IBOutlet weak var imgImage: UIImageView!
-//    @IBOutlet weak var lblName: UILabel!
-//
-//    @IBOutlet weak var lblPhoneType: UILabel!
-//    @IBOutlet weak var lblPhoneNumber: UILabel!
-//
-//    @IBOutlet weak var lblEmail: UILabel!
-//    @IBOutlet weak var lblCompany: UILabel!
-//    @IBOutlet weak var lblDOB: UILabel!
-//    @IBOutlet weak var lblID: UILabel!
-    
     
     // weak var listDelegrate: UpdateContactAfterProtocol? = nil
     
@@ -39,7 +29,7 @@ class MH1DetailVC: UIViewController , UITableViewDataSource  {
         if (section == 0) {
             return 1
         } else if (section == 1) {
-            return 1
+            return item.PhoneNumber.filter({$0.DisplayStatus == true}).count 
         }else if (section == 2) {
             return 1
         }else if (section == 3) {
@@ -62,8 +52,10 @@ class MH1DetailVC: UIViewController , UITableViewDataSource  {
             
         } else if (indexPath.section == 1) {
             let cell = myTable.dequeueReusableCell(withIdentifier: "CellPhoneType") as! CellDetail
-            //cell.lblPhoneType.text = item?.
-            cell.lblPhoneNumber.text = item?.PhoneNumber
+            let visibleRecords = item.PhoneNumber.filter({$0.DisplayStatus == true})
+            let item1 = visibleRecords[indexPath.row]
+            cell.lblPhoneType.text = item1.PhoneType
+            cell.lblPhoneNumber.text = item1.PhoneNumber
             
             return cell
             
@@ -90,15 +82,12 @@ class MH1DetailVC: UIViewController , UITableViewDataSource  {
         }
         
     }
-
     func numberOfSections(in tableView: UITableView) -> Int {
         return 6
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("item111",item)
-        
         myTable.dataSource = self
         
         imgImage.image = UIImage(named: item.Images )
@@ -107,6 +96,8 @@ class MH1DetailVC: UIViewController , UITableViewDataSource  {
         imgImage.clipsToBounds = true
         selectedImage = self.load(fileName: item!.Images)
         imgImage.image = selectedImage
+        
+        
     }
     
     //MH1 DetailVC nhan dc notifcation tu MHSua12
@@ -129,28 +120,30 @@ class MH1DetailVC: UIViewController , UITableViewDataSource  {
         
     }
     //ham lam viec
-    func classListUpdate2(with detailPerson: Person) {
-        print("vao hien thi chi tiet MH1Detail")
+    func classListUpdate2(with details: Person) {
         
-        if let imageView = self.load(fileName: detailPerson.Images) {
+        item = details
+        myTable.reloadData()
+        
+        if let imageView = self.load(fileName: details.Images) {
             imgImage.image = imageView as UIImage
         }
         
-        let cellname =  myTable.cellForRow(at: IndexPath(row: 0, section: 0)) as! CellDetail
-        cellname.lblName.text = detailPerson.Name
-
-        let cellphoneType = myTable.cellForRow(at: IndexPath(row: 0, section: 1)) as! CellDetail
-        cellphoneType.lblPhoneNumber.text = detailPerson.PhoneNumber
-
-        let cellemail =  myTable.cellForRow(at: IndexPath(row: 0, section: 2)) as! CellDetail
-        cellemail.lblEmail.text = detailPerson.Email
-
-        let cellcompany =  myTable.cellForRow(at: IndexPath(row: 0, section: 3)) as! CellDetail
-        cellcompany.lblCompany.text = detailPerson.Company
-
-        let celldob =  myTable.cellForRow(at: IndexPath(row: 0, section: 4)) as! CellDetail
-        celldob.lblDOB.text = detailPerson.DateOfBirth
-
+        //        let cellName =  myTable.cellForRow(at: IndexPath(row: 0, section: 0)) as! CellDetail
+        //        cellName.lblName.text = details.Name
+        //
+        //        let cellPhoneType = myTable.cellForRow(at: IndexPath(row: 1, section: 1)) as! CellDetail
+        ////        cellPhoneType.lblPhoneNumber.text = details.PhoneNumber.[cellPhoneType]
+        //
+        //        let cellEmail =  myTable.cellForRow(at: IndexPath(row: 0, section: 2)) as! CellDetail
+        //        cellEmail.lblEmail.text = details.Email
+        //
+        //        let cellCompany =  myTable.cellForRow(at: IndexPath(row: 0, section: 3)) as! CellDetail
+        //        cellCompany.lblCompany.text = details.Company
+        //
+        //        let celldob =  myTable.cellForRow(at: IndexPath(row: 0, section: 4)) as! CellDetail
+        //        celldob.lblDOB.text = details.DateOfBirth
+        
     }
     
     
@@ -184,9 +177,11 @@ class MH1DetailVC: UIViewController , UITableViewDataSource  {
     
     //dùng segue truyền data giữa các ViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("pass data Detail -> Sua", item.PhoneNumber)
         if let nav = segue.destination as? UINavigationController,
            let edit = nav.viewControllers.first as? SuaVC12 {
             edit.item = item
+            
             
             // edit.listDelegrate = listDelegrate
             //edit.detailDelegrate = self

@@ -18,4 +18,5 @@ class PhoneRow {
         self.PhoneType = phoneType
         self.DisplayStatus = displayStatus
     }
+    
 }
