@@ -11,7 +11,10 @@ import UIKit
 //    func classListUpdate2( with detailPerson: Person)
 //}
 
-class MH1DetailVC: UIViewController , UITableViewDataSource  {
+//typealias person = (Person) -> ()
+class MH1DetailVC: UIViewController , UITableViewDataSource, UITableViewDelegate  {
+    
+    //    var clousure: person!
     var selectedImage: UIImage!
     var item: Person!
     var documentsURL: URL {
@@ -23,13 +26,24 @@ class MH1DetailVC: UIViewController , UITableViewDataSource  {
     
     @IBOutlet weak var imgImage: UIImageView!
     
+    
+    @IBAction func btnEdit(_ sender: Any) {
+        print("click vao btnEdit")
+        guard let mhSua =  self.storyboard?.instantiateViewController(identifier:  "SuaVC12") as? SuaVC12 else {return}
+        mhSua.personDetailsOriginal = item!
+        navigationController?.pushViewController(mhSua, animated: true)
+        
+        //                guard let person = item else {return}
+        //        clousure(person)
+    }
+    
     // weak var listDelegrate: UpdateContactAfterProtocol? = nil
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
             return 1
         } else if (section == 1) {
-            return item.PhoneNumber.filter({$0.DisplayStatus == true}).count 
+            return item.PhoneNumber.filter({$0.DisplayStatus == true}).count
         }else if (section == 2) {
             return 1
         }else if (section == 3) {
@@ -89,6 +103,7 @@ class MH1DetailVC: UIViewController , UITableViewDataSource  {
     override func viewDidLoad() {
         super.viewDidLoad()
         myTable.dataSource = self
+        myTable.delegate = self
         
         imgImage.image = UIImage(named: item.Images )
         
@@ -123,11 +138,12 @@ class MH1DetailVC: UIViewController , UITableViewDataSource  {
     func classListUpdate2(with details: Person) {
         
         item = details
-        myTable.reloadData()
+        
         
         if let imageView = self.load(fileName: details.Images) {
             imgImage.image = imageView as UIImage
         }
+        myTable.reloadData()
         
         //        let cellName =  myTable.cellForRow(at: IndexPath(row: 0, section: 0)) as! CellDetail
         //        cellName.lblName.text = details.Name
@@ -154,7 +170,7 @@ class MH1DetailVC: UIViewController , UITableViewDataSource  {
             let fileURL = documentsURL.appendingPathComponent(fileName)
             if let imageData = image.jpegData(compressionQuality: 1.0) {
                 try? imageData.write(to: fileURL, options: .atomic)
-                print("aaa\(fileName)")
+                print("luu anh ok\(fileName)")
                 return fileName // ----> Save fileName
             }
         }
@@ -175,12 +191,12 @@ class MH1DetailVC: UIViewController , UITableViewDataSource  {
         return nil
     }
     
-    //dùng segue truyền data giữa các ViewController
+    //dùng segue truyền xuoi data giữa các ViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("pass data Detail -> Sua", item.PhoneNumber)
+        print("pass data Detail -> Sua", item.Name)
         if let nav = segue.destination as? UINavigationController,
            let edit = nav.viewControllers.first as? SuaVC12 {
-            edit.item = item
+            edit.personDetailsOriginal = item
             
             
             // edit.listDelegrate = listDelegrate

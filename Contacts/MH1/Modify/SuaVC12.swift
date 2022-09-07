@@ -6,9 +6,9 @@
 //
 
 import UIKit
-class SuaVC12: UIViewController , UITableViewDataSource {
+class SuaVC12: UIViewController , UITableViewDataSource, UITableViewDelegate {
     var imagePicker = UIImagePickerController()
-    var item: Person!
+    var personDetailsOriginal: Person!
     var personDetails: Person!
     var selectedImage: UIImage!
     var selectedImageName: String!
@@ -16,11 +16,9 @@ class SuaVC12: UIViewController , UITableViewDataSource {
     var documentsURL: URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
-    
-    @IBAction func btnHuyMHSua(_ sender: Any) {
-        self.dismiss(animated: true)
+    @IBAction func btnHuy(_ sender: Any) {
+       navigationController?.popViewController(animated: true)
     }
-    
     
     @IBOutlet weak var myTable: UITableView!
     @IBOutlet weak var imgHinh: UIImageView!
@@ -41,13 +39,16 @@ class SuaVC12: UIViewController , UITableViewDataSource {
     @IBAction func btnXong(_ sender: Any) {
         if (!personDetails.Name.isEmpty) {
             selectedImageName = self.save(image: selectedImage)
-            self.dismiss(animated: true)
+            
+            //self.dismiss(animated: true)
+            //chuyen man hinh
+            navigationController?.popViewController(animated: true)
             
             //  phat tin hieu de sua
             let dataToPass:[String: Person] = ["details": personDetails]
             let nc = NotificationCenter.default;
             nc.post(name: Notification.Name("TestNotification"), object: nil , userInfo: dataToPass)
-            item = personDetails
+            personDetailsOriginal = personDetails
         }
     }
     
@@ -169,7 +170,7 @@ class SuaVC12: UIViewController , UITableViewDataSource {
             
             
         default:
-            print("69", sender.text  ?? "")
+            print("69", sender.text ?? "")
         }
         
     }
@@ -204,16 +205,19 @@ class SuaVC12: UIViewController , UITableViewDataSource {
         let cell = myTable.cellForRow(at: indexPath) as! CellPhoneTypeModify
         let phoneType = cell.lblPhoneType.text!
         let selectedPhoneType: PhoneRow = personDetails.PhoneNumber.filter({$0.PhoneType == phoneType}).first!
-        // if selectedPhoneType != nil {
+        //if selectedPhoneType != nil {
         selectedPhoneType.DisplayStatus = false
         //}
         myTable.reloadData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        personDetails = item.copy() as? Person
         title = "Chi tiết sửa"
         myTable.dataSource = self
+        myTable.delegate = self
+        
+        personDetails = personDetailsOriginal.copy() as? Person
+//        phoneRow = phoneRowOriginal.copy() as! PhoneRow
         
         imgHinh.layer.cornerRadius = imgHinh.frame.width / 2
         imgHinh.clipsToBounds = true
@@ -227,7 +231,7 @@ class SuaVC12: UIViewController , UITableViewDataSource {
             let fileURL = documentsURL.appendingPathComponent(fileName)
             if let imageData = image.jpegData(compressionQuality: 1.0) {
                 try? imageData.write(to: fileURL, options: .atomic)
-                print("aaa\(fileName)")
+                //print("aaa\(fileName)")
                 return fileName // ----> Save fileName
             }
         }
@@ -247,7 +251,6 @@ class SuaVC12: UIViewController , UITableViewDataSource {
         }
         return nil
     }
-    
 }
 
 extension SuaVC12: UINavigationControllerDelegate, UIImagePickerControllerDelegate {

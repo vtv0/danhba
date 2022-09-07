@@ -19,6 +19,11 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         let scr = storyboard?.instantiateViewController(withIdentifier: "MH2Main") as! MH2MainVC
         navigationController?.pushViewController(scr, animated: true)
     }
+    
+    @IBOutlet var btnclickMHDeatail: DongMH1Cell!
+    
+    
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var myTable: UITableView!
     var DSTen:[Person] = [
@@ -53,12 +58,12 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         
         myTable.dataSource = self  // dòng này cấu hình cho myTable để cho 2 hàm cellForRowAt, numberRowInSection
         
-        for _person in DSTen {
-            let _prefixName = _person.Name.prefix(1).lowercased()
-            if (!tenDict.keys.contains(String(_prefixName))) {
-                tenDict[String(_prefixName)] = []
+        for person in DSTen {
+            let prefixName = person.Name.prefix(1).lowercased()
+            if (!tenDict.keys.contains(String(prefixName))) {
+                tenDict[String(prefixName)] = []
             }
-            tenDict[String(_prefixName)]?.append(_person)
+            tenDict[String(prefixName)]?.append(person)
             
         }
         searchDS = tenDict
@@ -133,6 +138,7 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         let items = searchDS[sectionTitle[indexPath.section]] ?? []
         let item = items[indexPath.row]
         cell.lblName.text = item.Name
+        
         //cell.lblPhoneNumber.text = item.PhoneNumber
         
         //        cell.lblName.text = DSTen[indexPath.row].Name
@@ -164,25 +170,32 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     //        self.performSegue(withIdentifier: "addcontact", sender: self)
     //    }
     
-    //dùng segue truyền data giữa các ViewController (truyền xuôi từ MH1 -> Mh )
+    //dùng segue truyền data giữa các ViewController (truyền xuôi từ MH1 -> Mh Detail )
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         print("click vao cell")
+        
         if let vc = segue.destination as? MH1DetailVC,
            let cell = sender as? UITableViewCell,
            let indexPath = myTable.indexPath(for: cell) {
             let items = searchDS[sectionTitle[indexPath.section]] ?? []
-            let item:Person = items[indexPath.row]
+            let item: Person = items[indexPath.row]
             vc.item = item
             
             //vc.listDelegrate = self
         }
-        
-        //        if let nav = segue.destination as? UINavigationController, let add = nav.viewControllers.first as? AddContactMH1 {
-        //            add.dele = self
-        //        }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("click vao cell")
+        let detail = self.storyboard?.instantiateViewController(withIdentifier: "MH1DetailVC" ) as! MH1DetailVC
+        let items1 = searchDS[sectionTitle[indexPath.section]] ?? []
+        let item = items1[indexPath.row] as? Person
+        //print("aaaaaaaa",item)
+        //let item: Person = items1[indexPath.row]
+        detail.item = items1[indexPath.row]
+        self.navigationController?.pushViewController(detail, animated: true)
+    }
     
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -197,12 +210,12 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
             
             DSTen.removeAll(where: {$0.ID == person.ID})
             tenDict.removeAll()
-            for _person in DSTen {
-                let _prefixName = _person.Name.prefix(1).lowercased()
-                if (!tenDict.keys.contains(String(_prefixName))) {
-                    tenDict[String(_prefixName)] = []
+            for person in DSTen {
+                let prefixName = person.Name.prefix(1).lowercased()
+                if (!tenDict.keys.contains(String(prefixName))) {
+                    tenDict[String(prefixName)] = []
                 }
-                tenDict[String(_prefixName)]?.append(_person)
+                tenDict[String(prefixName)]?.append(person)
                 
             }
             searchDS = tenDict
@@ -212,8 +225,8 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     }
     
     //hàm thực thi việc sửa từ MHSua12
-    func classListUpdate2(with details: Person) -> Bool {
-        print("co vao11", details.Name, details.ID)
+    func classListUpdate2(with details: Person) -> Void {
+        //print("co vao11", details.Name, details.ID)
         
         for person in DSTen {
             if person.ID == details.ID {
@@ -232,12 +245,12 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         
         tenDict = [String: [Person]]()
         searchDS = [String: [Person]]()
-        for _person in DSTen {
-            let _prefixName = _person.Name.prefix(1).lowercased()
-            if (!tenDict.keys.contains(String(_prefixName))) {
-                tenDict[String(_prefixName)] = []
+        for person in DSTen {
+            let prefixName = person.Name.prefix(1).lowercased()
+            if (!tenDict.keys.contains(String(prefixName))) {
+                tenDict[String(prefixName)] = []
             }
-            tenDict[String(_prefixName)]?.append(_person)
+            tenDict[String(prefixName)]?.append(person)
         }
         
         searchDS = tenDict
@@ -245,8 +258,6 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         sectionTitle = searchDS.keys.sorted()
         sectionTitle.sort()
         myTable.reloadData()
-        
-        return true
     }
     
     //ham them moi
@@ -256,12 +267,12 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         tenDict = [String: [Person]]()
         searchDS = [String: [Person]]()
         
-        for _person in DSTen {
-            let _prefixName = _person.Name.prefix(1).lowercased()
-            if (!tenDict.keys.contains(String(_prefixName))) {
-                tenDict[String(_prefixName)] = []
+        for person in DSTen {
+            let prefixName = person.Name.prefix(1).lowercased()
+            if (!tenDict.keys.contains(String(prefixName))) {
+                tenDict[String(prefixName)] = []
             }
-            tenDict[String(_prefixName)]?.append(_person)
+            tenDict[String(prefixName)]?.append(person)
         }
         
         searchDS = tenDict
@@ -286,12 +297,12 @@ extension ViewController: UISearchBarDelegate {
                     //contains: kiểm tra một đối tượng có tồn tại trong một collection - array , set , (dictionary)
                     searchDS[keyD] = [Person]()    // thì gán key trong SearchDS là một mảng Person
                 }
-                for _person in valueD {
-                    if (_person.Name.lowercased().contains(searchText.lowercased())) /*|| (_person.PhoneNumber.contains(searchText)) */{
-                        searchDS[keyD]?.append(_person)
+                for person in valueD {
+                    if (person.Name.lowercased().contains(searchText.lowercased())) /*|| (person.PhoneNumber.contains(searchText)) */{
+                        searchDS[keyD]?.append(person)
                     }
                     //                    if tenDict.contains(searchText.lowercased()) {  //không phân biệt chữ hoa hay thường trong SearchBar
-                    //                        searchDS[keyD]?.append(_person)
+                    //                        searchDS[keyD]?.append(person)
                     //                    }
                 }
             }
@@ -331,12 +342,12 @@ extension ViewController: UISearchBarDelegate {
 //        tenDict = [String: [Person]]()
 //        searchDS = [String: [Person]]()
 //
-//        for _person in DSTen {
-//            let _prefixName = _person.Name.prefix(1).lowercased()
+//        for person in DSTen {
+//            let _prefixName = person.Name.prefix(1).lowercased()
 //            if (!tenDict.keys.contains(String(_prefixName))) {
 //                tenDict[String(_prefixName)] = []
 //            }
-//            tenDict[String(_prefixName)]?.append(_person)
+//            tenDict[String(_prefixName)]?.append(person)
 //        }
 //
 //        searchDS = tenDict
@@ -355,12 +366,12 @@ extension ViewController: UISearchBarDelegate {
 //        tenDict = [String: [Person]]()
 //        searchDS = [String: [Person]]()
 //
-//        for _person in DSTen {
-//            let _prefixName = _person.Name.prefix(1).lowercased()
+//        for person in DSTen {
+//            let _prefixName = person.Name.prefix(1).lowercased()
 //            if (!tenDict.keys.contains(String(_prefixName))) {
 //                tenDict[String(_prefixName)] = []
 //            }
-//            tenDict[String(_prefixName)]?.append(_person)
+//            tenDict[String(_prefixName)]?.append(person)
 //        }
 //
 //        searchDS = tenDict
@@ -372,26 +383,26 @@ extension ViewController: UISearchBarDelegate {
 
 //    func classListUpdate2(with newPerson: Person) -> Bool {
 //        //print("hienchitiet")
-//            for _person in DSTen {
-//            if _person.ID == newPerson.ID {
-//                _person.Images = newPerson.Images
-//                _person.Name = newPerson.Name
-//                _person.PhoneNumber = newPerson.PhoneNumber
-//                _person.Email = newPerson.Email
-//                _person.DateOfBirth = newPerson.DateOfBirth
-//                _person.Company = newPerson.Company
+//            for person in DSTen {
+//            if person.ID == newPerson.ID {
+//                person.Images = newPerson.Images
+//                person.Name = newPerson.Name
+//                person.PhoneNumber = newPerson.PhoneNumber
+//                person.Email = newPerson.Email
+//                person.DateOfBirth = newPerson.DateOfBirth
+//                person.Company = newPerson.Company
 //            }
 //        }
 //
 //        tenDict = [String: [Person]]()
 //        searchDS = [String: [Person]]()
 //
-//        for _person in DSTen {
-//            let _prefixName = _person.Name.prefix(1).lowercased()
+//        for person in DSTen {
+//            let _prefixName = person.Name.prefix(1).lowercased()
 //            if (!tenDict.keys.contains(String(_prefixName))) {
 //                tenDict[String(_prefixName)] = []
 //            }
-//            tenDict[String(_prefixName)]?.append(_person)
+//            tenDict[String(_prefixName)]?.append(person)
 //        }
 //
 //        searchDS = tenDict

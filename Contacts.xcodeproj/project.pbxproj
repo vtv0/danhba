@@ -15,7 +15,7 @@
 		75CB6006289BDB9700ECB28A /* DongMH1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CB6005289BDB9700ECB28A /* DongMH1Cell.swift */; };
 		75CD0D472897B7BD00246F4B /* MH2MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CD0D462897B7BD00246F4B /* MH2MainVC.swift */; };
 		75CD0D492897CF6B00246F4B /* ButtonMH2Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CD0D482897CF6B00246F4B /* ButtonMH2Detail.swift */; };
-		75CE337A28B5BD4C004386C3 /* AssetMH1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CE337928B5BD4C004386C3 /* AssetMH1.swift */; };
+		75CE337A28B5BD4C004386C3 /* PhoneRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CE337928B5BD4C004386C3 /* PhoneRow.swift */; };
 		75D5E2B028B86BF90008A504 /* CellModify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5E2AF28B86BF90008A504 /* CellModify.swift */; };
 		75D5E2B228B86C1E0008A504 /* CellPhoneTypeModify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5E2B128B86C1E0008A504 /* CellPhoneTypeModify.swift */; };
 		75D6DEBE288659CA008E3970 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D6DEBD288659CA008E3970 /* AppDelegate.swift */; };
@@ -64,7 +64,7 @@
 		75CB6005289BDB9700ECB28A /* DongMH1Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DongMH1Cell.swift; sourceTree = "<group>"; };
 		75CD0D462897B7BD00246F4B /* MH2MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MH2MainVC.swift; sourceTree = "<group>"; };
 		75CD0D482897CF6B00246F4B /* ButtonMH2Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonMH2Detail.swift; sourceTree = "<group>"; };
-		75CE337928B5BD4C004386C3 /* AssetMH1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetMH1.swift; sourceTree = "<group>"; };
+		75CE337928B5BD4C004386C3 /* PhoneRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneRow.swift; sourceTree = "<group>"; };
 		75D5E2AF28B86BF90008A504 /* CellModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModify.swift; sourceTree = "<group>"; };
 		75D5E2B128B86C1E0008A504 /* CellPhoneTypeModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPhoneTypeModify.swift; sourceTree = "<group>"; };
 		75D6DEBA288659CA008E3970 /* Contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,7 +204,7 @@
 				75D6DECB288659CB008E3970 /* Info.plist */,
 				75D6DEC3288659CA008E3970 /* Main.storyboard */,
 				75DD879428A0CBC800DEA020 /* Person.swift */,
-				75CE337928B5BD4C004386C3 /* AssetMH1.swift */,
+				75CE337928B5BD4C004386C3 /* PhoneRow.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -402,7 +402,7 @@
 				75362D6E28B7759E009BF8E8 /* CellDetail.swift in Sources */,
 				75D6DEC0288659CA008E3970 /* SceneDelegate.swift in Sources */,
 				75F2A64F28B723F80063D16A /* CellId.swift in Sources */,
-				75CE337A28B5BD4C004386C3 /* AssetMH1.swift in Sources */,
+				75CE337A28B5BD4C004386C3 /* PhoneRow.swift in Sources */,
 				75F2A64728B70C540063D16A /* CellPhoneType.swift in Sources */,
 				75CD0D472897B7BD00246F4B /* MH2MainVC.swift in Sources */,
 			);

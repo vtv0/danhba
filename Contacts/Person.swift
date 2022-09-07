@@ -8,11 +8,10 @@
 import Foundation
 
 class Person: NSObject, NSCopying {
-    
     public var ID: String
     public var Images: String
     public var Name: String
-    public var PhoneNumber:[PhoneRow] = [
+    public var PhoneNumber: [PhoneRow]  = [
         PhoneRow(phoneNumber: "", phoneType: "di động", displayStatus: true),
         PhoneRow(phoneNumber: "", phoneType: "nhà", displayStatus: false),
         PhoneRow(phoneNumber: "", phoneType: "công ty", displayStatus: false),
@@ -28,13 +27,16 @@ class Person: NSObject, NSCopying {
         self.ID = id
         self.Images = images
         self.Name = name
-        self.PhoneNumber = phoneNumber
+        self.PhoneNumber = []
+        for item in phoneNumber {
+            self.PhoneNumber.append(item.copy() as! PhoneRow)
+        }
         
         self.Email = email
         self.Company = company
         self.DateOfBirth = dateOfBirth
     }
-    
+    //var PhoneRowDuplicate = PhoneRow.copy()
     init( id: String, images: String, name: String, email: String, company: String, dateOfBirth: String) {
         self.ID = id
         self.Images = images

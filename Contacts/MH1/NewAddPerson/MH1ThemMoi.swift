@@ -31,12 +31,12 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
     @IBAction func btnDone(_ sender: Any) {
         
         let cell = myTable.cellForRow(at: IndexPath(row: 0, section: 0)) as! CellName
-        let cell1 = myTable.cellForRow(at: IndexPath(row: 1, section: 1)) as? CellPhoneType
+        //let cell1 = myTable.cellForRow(at: IndexPath(row: 1, section: 1)) as? CellPhoneType
         let cell2 = myTable.cellForRow(at: IndexPath(row: 0, section: 2)) as? CellEmail
         let cell3 = myTable.cellForRow(at: IndexPath(row: 0, section: 3)) as? CellCompany
         let cell4 = myTable.cellForRow(at: IndexPath(row: 0, section: 4)) as? CellDofB
-        let cell5 = myTable.cellForRow(at: IndexPath(row: 0, section: 5)) as! CellId
-        
+//        if let cell5 = myTable.cellForRow(at: IndexPath(row: 0, section: 5)) as? CellId
+//        { }
         
         let numOfRows: Int = myTable.numberOfRows(inSection: 1)
         for i in 1..<numOfRows {
@@ -55,9 +55,10 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
             
             selectedImageName = self.save(image: selectedImage)
             
-            print("", personDetails.PhoneNumber[1].DisplayStatus)
-            let personDetails = Person(id: randomString(length: 6), images: selectedImageName, name: cell.txtName.text ?? "", phoneNumber: personDetails.PhoneNumber , email: cell2?.txtEmail.text ?? "", company: cell3?.txtCompany.text ?? "", dateOfBirth: cell4?.txtDOB.text ?? "")
+//            print("", personDetails.PhoneNumber[1].DisplayStatus)
+//            let personDetails = Person(id: randomString(length: 6), images: selectedImageName, name: cell.txtName.text ?? "", phoneNumber: personDetails.PhoneNumber , email: cell2?.txtEmail.text ?? "", company: cell3?.txtCompany.text ?? "", dateOfBirth: cell4?.txtDOB.text ?? "")
             
+            personDetails.ID = randomString(length: 6)
             self.dismiss(animated: true)
             
             //phat tin hieu de them moi
@@ -251,7 +252,7 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
     
     @objc func onInputNameChange(_ sender: UITextField) {
         print("name", sender.text ?? "honr")
-        //personDetails.Name = sender.text ?? ""
+        personDetails.Name = sender.text ?? ""
         
     }
     @objc func onInputChange(_ sender: UITextField) {

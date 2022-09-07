@@ -3,13 +3,30 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "MH1DetailVC.viewDidLoad():MH1DetailVC.swift">
+      </ContextState>
+      <ContextState
          contextName = "MH1ThemMoi.load(fileName:):MH1ThemMoi.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.tableView(_:didSelectRowAt:):ViewController.swift">
       </ContextState>
       <ContextState
          contextName = "MH1DetailVC.prepare(for:sender:):MH1DetailVC.swift">
          <PersistentStrings>
             <PersistentString
                value = "segue.destination as? SuaVC12">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SuaVC12.viewDidLoad():SuaVC12.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SuaVC12.btnXongMHSua(_:):SuaVC12.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedImageName">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -22,12 +39,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SuaVC12.btnXongMHSua(_:):SuaVC12.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "selectedImageName">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "ViewController.classAddNew(with:):ViewController.swift">
       </ContextState>
       <ContextState
          contextName = "SuaVC12.save(image:):SuaVC12.swift">
@@ -37,6 +49,9 @@
          <PersistentStrings>
             <PersistentString
                value = "selectedImage">
+            </PersistentString>
+            <PersistentString
+               value = "self.personDetails">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
