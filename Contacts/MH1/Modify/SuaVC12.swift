@@ -11,7 +11,6 @@ class SuaVC12: UIViewController , UITableViewDataSource, UITableViewDelegate {
     var personDetailsOriginal: Person!
     var personDetails: Person!
     var selectedImage: UIImage!
-    var selectedImageName: String!
     
     var documentsURL: URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -38,7 +37,7 @@ class SuaVC12: UIViewController , UITableViewDataSource, UITableViewDelegate {
     
     @IBAction func btnXong(_ sender: Any) {
         if (!personDetails.Name.isEmpty) {
-            selectedImageName = self.save(image: selectedImage)
+            personDetails.Images = self.save(image: selectedImage) ?? ""
             
             //self.dismiss(animated: true)
             //chuyen man hinh

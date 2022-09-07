@@ -19,7 +19,6 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
     var personDetails: Person = Person(id: "", images: "", name: "", email: "", company: "", dateOfBirth: "")
     
     var selectedImage: UIImage!
-    var selectedImageName: String!
     
     var documentsURL: URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -32,9 +31,9 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
         
         let cell = myTable.cellForRow(at: IndexPath(row: 0, section: 0)) as! CellName
         //let cell1 = myTable.cellForRow(at: IndexPath(row: 1, section: 1)) as? CellPhoneType
-        let cell2 = myTable.cellForRow(at: IndexPath(row: 0, section: 2)) as? CellEmail
-        let cell3 = myTable.cellForRow(at: IndexPath(row: 0, section: 3)) as? CellCompany
-        let cell4 = myTable.cellForRow(at: IndexPath(row: 0, section: 4)) as? CellDofB
+        //let cell2 = myTable.cellForRow(at: IndexPath(row: 0, section: 2)) as? CellEmail
+        //let cell3 = myTable.cellForRow(at: IndexPath(row: 0, section: 3)) as? CellCompany
+        //let cell4 = myTable.cellForRow(at: IndexPath(row: 0, section: 4)) as? CellDofB
 //        if let cell5 = myTable.cellForRow(at: IndexPath(row: 0, section: 5)) as? CellId
 //        { }
         
@@ -53,7 +52,7 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
         if (cell.txtName.text != "") {
             //print("nhay vao xong MH Them moi")
             
-            selectedImageName = self.save(image: selectedImage)
+            personDetails.Images = self.save(image: selectedImage) ?? ""
             
 //            print("", personDetails.PhoneNumber[1].DisplayStatus)
 //            let personDetails = Person(id: randomString(length: 6), images: selectedImageName, name: cell.txtName.text ?? "", phoneNumber: personDetails.PhoneNumber , email: cell2?.txtEmail.text ?? "", company: cell3?.txtCompany.text ?? "", dateOfBirth: cell4?.txtDOB.text ?? "")
@@ -62,8 +61,7 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
             self.dismiss(animated: true)
             
             //phat tin hieu de them moi
-            let notification = NotificationCenter.default
-            notification.post(name: Notification.Name("UseNoti"), object: nil , userInfo: ["details" : personDetails])
+            NotificationCenter.default.post(name: Notification.Name("UseNoti"), object: nil , userInfo: ["details" : personDetails])
             //print("111a: \(personDetails)")
             //print(personDetails)
         }

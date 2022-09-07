@@ -76,39 +76,39 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     override func viewWillAppear(_ animated: Bool) {
         //cột nhận tín hiệu từ MH Sua12
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.willEnterForeground(_:)),
+                                               selector: #selector(self.classListUpdate2(_:)),
                                                name: Notification.Name("TestNotification"),
                                                object: nil
         )
         
         //cột nhận tín hiệu từ MH ThemMoi
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.willEnter(_:)),
+                                               selector: #selector(self.classAddNew(_:)),
                                                name: Notification.Name("UseNoti"),
                                                object: nil);
         
     }
     
     //chuyển đến classListUpdate2
-    @objc private func willEnterForeground(_ notification: Notification) {
-        let details = notification.userInfo?["details"] as? Person
-        if details != nil {
-            //print(details?.Name)
-            self.classListUpdate2(with: details!)
-        }
-    }
+//    @objc private func willEnterForeground(_ notification: Notification) {
+//        let details = notification.userInfo?["details"] as? Person
+//        if details != nil {
+//            //print(details?.Name)
+//            self.classListUpdate2(with: details!)
+//        }
+//    }
     
     
     //chuyển đến classAddNew
-    @objc private func willEnter(_ notification : Notification) {
-        let details:Person = (notification.userInfo!["details"] as? Person)!
-        
-        //if details != nil {
-        self.classAddNew(with: details)
-        //}
-        
-        
-    }
+//    @objc private func willEnter(_ notification : Notification) {
+//        let details:Person = (notification.userInfo!["details"] as? Person)!
+//
+//        //if details != nil {
+//        self.classAddNew(with: details)
+//        //}
+//
+//
+//    }
     
     //    override func viewWillAppear(_ animated: Bool) {
     //
@@ -136,13 +136,15 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = myTable.dequeueReusableCell(withIdentifier: "CELL") as! DongMH1Cell
         let items = searchDS[sectionTitle[indexPath.section]] ?? []
-        let item = items[indexPath.row]
-        cell.lblName.text = item.Name
-        
-        //cell.lblPhoneNumber.text = item.PhoneNumber
-        
-        //        cell.lblName.text = DSTen[indexPath.row].Name
-        //        cell.lblPhoneNumber.text = DSTen[indexPath.row].PhoneNumber
+        if !items.isEmpty {
+            let item = items[indexPath.row]
+            cell.lblName.text = item.Name
+            
+            //cell.lblPhoneNumber.text = item.PhoneNumber
+            
+            //        cell.lblName.text = DSTen[indexPath.row].Name
+            //        cell.lblPhoneNumber.text = DSTen[indexPath.row].PhoneNumber
+        }
         return cell
     }
     
@@ -190,7 +192,7 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         print("click vao cell")
         let detail = self.storyboard?.instantiateViewController(withIdentifier: "MH1DetailVC" ) as! MH1DetailVC
         let items1 = searchDS[sectionTitle[indexPath.section]] ?? []
-        let item = items1[indexPath.row] as? Person
+       // let item = items1[indexPath.row] as? Person
         //print("aaaaaaaa",item)
         //let item: Person = items1[indexPath.row]
         detail.item = items1[indexPath.row]
@@ -225,8 +227,10 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     }
     
     //hàm thực thi việc sửa từ MHSua12
-    func classListUpdate2(with details: Person) -> Void {
+    @objc
+    func classListUpdate2(_ notification: Notification) -> Void {
         //print("co vao11", details.Name, details.ID)
+        let details:Person = (notification.userInfo!["details"] as? Person)!
         
         for person in DSTen {
             if person.ID == details.ID {
@@ -261,7 +265,9 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     }
     
     //ham them moi
-    func classAddNew(with detailPerson: Person){
+    @objc
+    func classAddNew(_ notification : Notification){
+        let detailPerson:Person = (notification.userInfo!["details"] as? Person)!
         self.DSTen.append(detailPerson)
         
         tenDict = [String: [Person]]()
@@ -329,9 +335,6 @@ extension ViewController: UISearchBarDelegate {
 //        self.myTable.reloadData()
 //    }
 //}
-
-
-
 
 
 //extension ViewController: UpdateContactAfterProtocol {
