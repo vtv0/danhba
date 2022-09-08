@@ -15,10 +15,10 @@ import UIKit
 
 class ViewController: UIViewController , UITableViewDataSource , UITableViewDelegate {    
     //chuyển màn hình sang MH2
-    @IBAction func btnBackMH2(_ sender: Any) {
-        let scr = storyboard?.instantiateViewController(withIdentifier: "MH2Main") as! MH2MainVC
-        navigationController?.pushViewController(scr, animated: true)
-    }
+    //    @IBAction func btnBackMH2(_ sender: Any) {
+    //        let scr = storyboard?.instantiateViewController(withIdentifier: "MH2Main") as! MH2MainVC
+    //        navigationController?.pushViewController(scr, animated: true)
+    //    }
     
     @IBOutlet var btnclickMHDeatail: DongMH1Cell!
     
@@ -27,19 +27,19 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var myTable: UITableView!
     var DSTen:[Person] = [
-        Person(id: "0", images: "", name: "nhu", phoneNumber: [PhoneRow(phoneNumber: "0000", phoneType: "diđộng", displayStatus: true)], email: "nhu000@.com", company: "aa", dateOfBirth:  "08/08/2022"),
-        Person(id: "1", images: "", name: "lan", phoneNumber: [PhoneRow(phoneNumber: "0011", phoneType: "nhà", displayStatus: true)], email: "lan111@.com", company: "bb", dateOfBirth: "07/08/2022"),
-        Person(id: "2", images: "", name: "an", phoneNumber: [PhoneRow(phoneNumber: "0022", phoneType: "chính", displayStatus: true)], email: "ba0@333.com", company: "baba0", dateOfBirth: "04/08/2022"),
-        Person(id: "3", images: "", name: "ba", phoneNumber: [PhoneRow(phoneNumber: "0033", phoneType: "công ty", displayStatus: true)], email: "ba1@333.com", company: "baba1", dateOfBirth: "24/08/2022"),
-        Person(id: "4", images: "", name: "nang", phoneNumber: [PhoneRow(phoneNumber: "0044", phoneType: "diđộng", displayStatus: true)], email: "ba2@333.com", company: "baba2", dateOfBirth: "14/08/2022"),
-        Person(id: "5", images: "", name: "bang", phoneNumber: [PhoneRow(phoneNumber: "0055", phoneType: "diđộng", displayStatus: true)], email: "ba3@333.com", company: "baba3" , dateOfBirth: "04/08/2022"),
-        Person(id: "6", images: "", name: "tu", phoneNumber: [PhoneRow(phoneNumber: "0066", phoneType: "diđộng", displayStatus: true)], email: "ba4@333.com", company: "baba4", dateOfBirth: "04/08/2022"),
-        Person(id: "7", images: "", name: "tung", phoneNumber: [PhoneRow(phoneNumber: "0077", phoneType: "diđộng", displayStatus: true)], email: "ba5@333.com", company: "baba5", dateOfBirth: "04/08/2022"),
-        Person(id: "8", images: "", name: "ha", phoneNumber: [PhoneRow(phoneNumber: "0088", phoneType: "diđộng", displayStatus: true)], email: "ha@010.com", company: "b1b1", dateOfBirth: "01/08/2022"),
-        Person(id: "9", images: "", name: "hang", phoneNumber: [PhoneRow(phoneNumber: "0099", phoneType: "diđộng", displayStatus: true)], email: "bon@444.com", company: "bbb", dateOfBirth: "04/08/2022"),
-        Person(id: "10", images: "", name: "hung", phoneNumber: [PhoneRow(phoneNumber: "1010", phoneType: "diđộng", displayStatus: true)], email: "nam55@.com", company: "nnn", dateOfBirth: "02/08/2022"),
-        Person(id: "11", images: "", name: "linh", phoneNumber: [PhoneRow(phoneNumber: "1111", phoneType: "diđộng", displayStatus: true)], email: "f88@.com", company: "tam", dateOfBirth: "05/08/2022"),
-        Person(id: "12", images: "", name: "luan", phoneNumber: [PhoneRow(phoneNumber: "1212", phoneType: "diđộng", displayStatus: false)], email: "luan@999.com", company: "bang", dateOfBirth: "06/08/2022"),
+        Person(id: "0", images: "", name: "nhu", phoneNumber: [PhoneRow(phoneNumber: "0000", phoneType: "mobile", displayStatus: true)], email: "nhu000@.com", company: "aa", dateOfBirth:  "08/08/2022"),
+        Person(id: "1", images: "", name: "lan", phoneNumber: [PhoneRow(phoneNumber: "0011", phoneType: "home", displayStatus: true)], email: "lan111@.com", company: "bb", dateOfBirth: "07/08/2022"),
+        Person(id: "2", images: "", name: "an", phoneNumber: [PhoneRow(phoneNumber: "0022", phoneType: "main", displayStatus: true)], email: "ba0@333.com", company: "baba0", dateOfBirth: "04/08/2022"),
+        Person(id: "3", images: "", name: "ba", phoneNumber: [PhoneRow(phoneNumber: "0033", phoneType: "company", displayStatus: true)], email: "ba1@333.com", company: "baba1", dateOfBirth: "24/08/2022"),
+        Person(id: "4", images: "", name: "nang", phoneNumber: [PhoneRow(phoneNumber: "0044", phoneType: "mobile", displayStatus: true)], email: "ba2@333.com", company: "baba2", dateOfBirth: "14/08/2022"),
+        Person(id: "5", images: "", name: "bang", phoneNumber: [PhoneRow(phoneNumber: "0055", phoneType: "mobile", displayStatus: true)], email: "ba3@333.com", company: "baba3" , dateOfBirth: "04/08/2022"),
+        Person(id: "6", images: "", name: "tu", phoneNumber: [PhoneRow(phoneNumber: "0066", phoneType: "mobile", displayStatus: true)], email: "ba4@333.com", company: "baba4", dateOfBirth: "04/08/2022"),
+        Person(id: "7", images: "", name: "tung", phoneNumber: [PhoneRow(phoneNumber: "0077", phoneType: "home", displayStatus: true)], email: "ba5@333.com", company: "baba5", dateOfBirth: "04/08/2022"),
+        Person(id: "8", images: "", name: "ha", phoneNumber: [PhoneRow(phoneNumber: "0088", phoneType: "company", displayStatus: true)], email: "ha@010.com", company: "b1b1", dateOfBirth: "01/08/2022"),
+        Person(id: "9", images: "", name: "hang", phoneNumber: [PhoneRow(phoneNumber: "0099", phoneType: "home", displayStatus: true)], email: "bon@444.com", company: "bbb", dateOfBirth: "04/08/2022"),
+        Person(id: "10", images: "", name: "hung", phoneNumber: [PhoneRow(phoneNumber: "1010", phoneType: "home", displayStatus: true)], email: "nam55@.com", company: "nnn", dateOfBirth: "02/08/2022"),
+        Person(id: "11", images: "", name: "linh", phoneNumber: [PhoneRow(phoneNumber: "1111", phoneType: "school", displayStatus: true)], email: "f88@.com", company: "tam", dateOfBirth: "05/08/2022"),
+        Person(id: "12", images: "", name: "luan", phoneNumber: [PhoneRow(phoneNumber: "1212", phoneType: "school", displayStatus: false)], email: "luan@999.com", company: "bang", dateOfBirth: "06/08/2022"),
         
     ]
     // var titles: [String] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
@@ -73,6 +73,14 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         sectionTitle.sort()
     }
     
+    //    override func viewWillDisappear(_ animated: Bool) {
+    //        super.viewWillDisappear(true)
+    //        print("zzzzz")
+    //        func removeObserver(_: Any, name: NSNotification.Name? , Object: Any) {
+    //
+    //        }
+    //        NotificationCenter.default.removeObserver(self)
+    //     }
     override func viewWillAppear(_ animated: Bool) {
         //cột nhận tín hiệu từ MH Sua12
         NotificationCenter.default.addObserver(self,
@@ -87,28 +95,93 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
                                                name: Notification.Name("UseNoti"),
                                                object: nil);
         
+        // NotificationCenter.default.removeObserver(self)
+        
     }
     
+    @objc func classListUpdate2(_ notification: Notification) -> Void {
+        print("co vao11")
+        let details:Person = (notification.userInfo!["details"] as? Person)!
+        
+        for person in DSTen {
+            if person.ID == details.ID {
+                person.Images = details.Images
+                person.Name = details.Name
+                person.PhoneNumber = details.PhoneNumber
+                person.Email = details.Email
+                person.DateOfBirth = details.DateOfBirth
+                person.Company = details.Company
+                break
+            }
+        }
+        
+        //        let d: Person = DSTen.filter({$0.ID == details.ID}).first!
+        //        print("axbx", d.Name)
+        
+        tenDict = [String: [Person]]()
+        searchDS = [String: [Person]]()
+        for person in DSTen {
+            let prefixName = person.Name.prefix(1).lowercased()
+            if (!tenDict.keys.contains(String(prefixName))) {
+                tenDict[String(prefixName)] = []
+            }
+            tenDict[String(prefixName)]?.append(person)
+        }
+        
+        searchDS = tenDict
+        //xếp tên theo kí tự        //var sectionTitle = [String]()
+        sectionTitle = searchDS.keys.sorted()
+        sectionTitle.sort()
+        myTable.reloadData()
+    }
+    
+    //ham them moi
+    
+    @objc func classAddNew(_ notification : Notification){
+        let detailPerson:Person = (notification.userInfo!["details"] as? Person)!
+        self.DSTen.append(detailPerson)
+        
+        tenDict = [String: [Person]]()
+        searchDS = [String: [Person]]()
+        
+        for person in DSTen {
+            let prefixName = person.Name.prefix(1).lowercased()
+            if (!tenDict.keys.contains(String(prefixName))) {
+                tenDict[String(prefixName)] = []
+            }
+            tenDict[String(prefixName)]?.append(person)
+        }
+        
+        searchDS = tenDict
+        //xếp tên theo kí tự        //var sectionTitle = [String]()
+        sectionTitle = searchDS.keys.sorted()
+        sectionTitle.sort()
+        self.myTable.reloadData()
+    }
+    
+    
+    
+    
     //chuyển đến classListUpdate2
-//    @objc private func willEnterForeground(_ notification: Notification) {
-//        let details = notification.userInfo?["details"] as? Person
-//        if details != nil {
-//            //print(details?.Name)
-//            self.classListUpdate2(with: details!)
-//        }
-//    }
+    //    @objc private func willEnterForeground(_ notification: Notification) {
+    //        let details = notification.userInfo?["details"] as? Person
+    //        if details != nil {
+    //            //print(details?.Name)
+    //            self.classListUpdate2(with: details!)
+    //        }
+    //    }
     
     
     //chuyển đến classAddNew
-//    @objc private func willEnter(_ notification : Notification) {
-//        let details:Person = (notification.userInfo!["details"] as? Person)!
-//
-//        //if details != nil {
-//        self.classAddNew(with: details)
-//        //}
-//
-//
-//    }
+    //    @objc private func willEnter(_ notification : Notification) {
+    //        let details:Person = (notification.userInfo!["details"] as? Person)!
+    //
+    //        //if details != nil {
+    //        self.classAddNew(with: details)
+    //        //}
+    //
+    //
+    //    }
     
     //    override func viewWillAppear(_ animated: Bool) {
     //
@@ -192,7 +265,7 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         print("click vao cell")
         let detail = self.storyboard?.instantiateViewController(withIdentifier: "MH1DetailVC" ) as! MH1DetailVC
         let items1 = searchDS[sectionTitle[indexPath.section]] ?? []
-       // let item = items1[indexPath.row] as? Person
+        // let item = items1[indexPath.row] as? Person
         //print("aaaaaaaa",item)
         //let item: Person = items1[indexPath.row]
         detail.item = items1[indexPath.row]
@@ -227,66 +300,7 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     }
     
     //hàm thực thi việc sửa từ MHSua12
-    @objc
-    func classListUpdate2(_ notification: Notification) -> Void {
-        //print("co vao11", details.Name, details.ID)
-        let details:Person = (notification.userInfo!["details"] as? Person)!
-        
-        for person in DSTen {
-            if person.ID == details.ID {
-                person.Images = details.Images
-                person.Name = details.Name
-                person.PhoneNumber = details.PhoneNumber
-                person.Email = details.Email
-                person.DateOfBirth = details.DateOfBirth
-                person.Company = details.Company
-                break
-            }
-        }
-        
-        //        let d: Person = DSTen.filter({$0.ID == details.ID}).first!
-        //        print("axbx", d.Name)
-        
-        tenDict = [String: [Person]]()
-        searchDS = [String: [Person]]()
-        for person in DSTen {
-            let prefixName = person.Name.prefix(1).lowercased()
-            if (!tenDict.keys.contains(String(prefixName))) {
-                tenDict[String(prefixName)] = []
-            }
-            tenDict[String(prefixName)]?.append(person)
-        }
-        
-        searchDS = tenDict
-        //xếp tên theo kí tự        //var sectionTitle = [String]()
-        sectionTitle = searchDS.keys.sorted()
-        sectionTitle.sort()
-        myTable.reloadData()
-    }
     
-    //ham them moi
-    @objc
-    func classAddNew(_ notification : Notification){
-        let detailPerson:Person = (notification.userInfo!["details"] as? Person)!
-        self.DSTen.append(detailPerson)
-        
-        tenDict = [String: [Person]]()
-        searchDS = [String: [Person]]()
-        
-        for person in DSTen {
-            let prefixName = person.Name.prefix(1).lowercased()
-            if (!tenDict.keys.contains(String(prefixName))) {
-                tenDict[String(prefixName)] = []
-            }
-            tenDict[String(prefixName)]?.append(person)
-        }
-        
-        searchDS = tenDict
-        //xếp tên theo kí tự        //var sectionTitle = [String]()
-        sectionTitle = searchDS.keys.sorted()
-        sectionTitle.sort()
-        self.myTable.reloadData()
-    }
     
     
 }

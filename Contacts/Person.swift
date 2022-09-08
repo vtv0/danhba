@@ -12,12 +12,12 @@ class Person: NSObject, NSCopying {
     public var Images: String
     public var Name: String
     public var PhoneNumber: [PhoneRow]  = [
-        PhoneRow(phoneNumber: "", phoneType: "di động", displayStatus: true),
-        PhoneRow(phoneNumber: "", phoneType: "nhà", displayStatus: false),
-        PhoneRow(phoneNumber: "", phoneType: "công ty", displayStatus: false),
-        PhoneRow(phoneNumber: "", phoneType: "trường học", displayStatus: false),
-        PhoneRow(phoneNumber: "", phoneType: "chính", displayStatus: false),
-        PhoneRow(phoneNumber: "", phoneType: "fax công ty", displayStatus: false)
+        PhoneRow(phoneNumber: "", phoneType: "mobile", displayStatus: true),
+        PhoneRow(phoneNumber: "", phoneType: "home", displayStatus: false),
+        PhoneRow(phoneNumber: "", phoneType: "company", displayStatus: false),
+        PhoneRow(phoneNumber: "", phoneType: "school", displayStatus: false),
+        PhoneRow(phoneNumber: "", phoneType: "main", displayStatus: false),
+        PhoneRow(phoneNumber: "", phoneType: "company fax", displayStatus: false)
     ]
     public var Email: String
     public var Company: String
@@ -27,9 +27,12 @@ class Person: NSObject, NSCopying {
         self.ID = id
         self.Images = images
         self.Name = name
-        self.PhoneNumber = []
-        for item in phoneNumber {
-            self.PhoneNumber.append(item.copy() as! PhoneRow)
+        for item:PhoneRow in phoneNumber {
+            let currentPhoneRow = self.PhoneNumber.filter({$0.PhoneType == item.PhoneType}).first
+            if currentPhoneRow != nil {
+                currentPhoneRow?.PhoneNumber = item.PhoneNumber
+                currentPhoneRow?.DisplayStatus = item.DisplayStatus
+            }
         }
         
         self.Email = email

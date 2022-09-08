@@ -34,8 +34,8 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
         //let cell2 = myTable.cellForRow(at: IndexPath(row: 0, section: 2)) as? CellEmail
         //let cell3 = myTable.cellForRow(at: IndexPath(row: 0, section: 3)) as? CellCompany
         //let cell4 = myTable.cellForRow(at: IndexPath(row: 0, section: 4)) as? CellDofB
-//        if let cell5 = myTable.cellForRow(at: IndexPath(row: 0, section: 5)) as? CellId
-//        { }
+        //        if let cell5 = myTable.cellForRow(at: IndexPath(row: 0, section: 5)) as? CellId
+        //        { }
         
         let numOfRows: Int = myTable.numberOfRows(inSection: 1)
         for i in 1..<numOfRows {
@@ -54,8 +54,8 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
             
             personDetails.Images = self.save(image: selectedImage) ?? ""
             
-//            print("", personDetails.PhoneNumber[1].DisplayStatus)
-//            let personDetails = Person(id: randomString(length: 6), images: selectedImageName, name: cell.txtName.text ?? "", phoneNumber: personDetails.PhoneNumber , email: cell2?.txtEmail.text ?? "", company: cell3?.txtCompany.text ?? "", dateOfBirth: cell4?.txtDOB.text ?? "")
+            //            print("", personDetails.PhoneNumber[1].DisplayStatus)
+            //            let personDetails = Person(id: randomString(length: 6), images: selectedImageName, name: cell.txtName.text ?? "", phoneNumber: personDetails.PhoneNumber , email: cell2?.txtEmail.text ?? "", company: cell3?.txtCompany.text ?? "", dateOfBirth: cell4?.txtDOB.text ?? "")
             
             personDetails.ID = randomString(length: 6)
             self.dismiss(animated: true)
@@ -172,6 +172,14 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
         selectedImageImageView.clipsToBounds = true
         myTable.dataSource = self
     }
+    //    override func viewWillDisappear(_ animated: Bool) {
+    //        super.viewWillDisappear(animated)
+    //        print("a the a ")
+    //        //func removeObserver( name: Notification.Name("UseNoti") , Object: Any) {
+    //            NotificationCenter.default.removeObserver(self)
+    //        //}
+    //    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 6
@@ -249,7 +257,7 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
     
     
     @objc func onInputNameChange(_ sender: UITextField) {
-        print("name", sender.text ?? "honr")
+        print("name", sender.text ?? "hon")
         personDetails.Name = sender.text ?? ""
         
     }
@@ -304,10 +312,6 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
         personDetails.DateOfBirth = sender.text ?? ""
     }
 }
-
-
-
-
 
 extension MH1ThemMoi: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {

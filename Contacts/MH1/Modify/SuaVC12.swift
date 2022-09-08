@@ -16,7 +16,7 @@ class SuaVC12: UIViewController , UITableViewDataSource, UITableViewDelegate {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
     @IBAction func btnHuy(_ sender: Any) {
-       navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @IBOutlet weak var myTable: UITableView!
@@ -216,7 +216,7 @@ class SuaVC12: UIViewController , UITableViewDataSource, UITableViewDelegate {
         myTable.delegate = self
         
         personDetails = personDetailsOriginal.copy() as? Person
-//        phoneRow = phoneRowOriginal.copy() as! PhoneRow
+        //        phoneRow = phoneRowOriginal.copy() as! PhoneRow
         
         imgHinh.layer.cornerRadius = imgHinh.frame.width / 2
         imgHinh.clipsToBounds = true

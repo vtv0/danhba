@@ -118,29 +118,29 @@ class MH1DetailVC: UIViewController , UITableViewDataSource, UITableViewDelegate
     //MH1 DetailVC nhan dc notifcation tu MHSua12
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.willEnterForeground(_:)),
+                                               selector: #selector(self.classListUpdate1(_:)),
                                                name: Notification.Name("TestNotification"),
                                                object: nil
         )
     }
     
     
-    @objc private func willEnterForeground(_ notification: Notification) {
-        let details = notification.userInfo?["details"] as? Person
-        if details != nil {
-            //print(details?.Name)
-            self.classListUpdate2(with: details!)
-        }
-        print("MH1 DetailVC nhan dc notification tu MHSua12")
-        
-    }
+    //    @objc private func willEnterForeground(_ notification: Notification) {
+    //        let details = notification.userInfo?["details"] as? Person
+    //        if details != nil {
+    //            //print(details?.Name)
+    //            self.classListUpdate2(with: details!)
+    //        }
+    //        print("MH1 DetailVC nhan dc notification tu MHSua12")
+    //        
+    //    }
     //ham lam viec
-    func classListUpdate2(with details: Person) {
-        
+    @objc func classListUpdate1(_ notification: Notification)  {
+        let details = notification.userInfo?["details"] as? Person
         item = details
         
         
-        if let imageView = self.load(fileName: details.Images) {
+        if let imageView = self.load(fileName: details?.Images ?? "") {
             imgImage.image = imageView as UIImage
         }
         myTable.reloadData()
