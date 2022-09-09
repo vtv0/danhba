@@ -7,6 +7,10 @@
 
 import UIKit
 //import Contacts
+//protocol SenderViewControllerDelagate {
+//    func passpersonDetails(data: AnyObject)
+//}
+
 
 class MH1ThemMoi: UIViewController , UITableViewDataSource {
     @IBOutlet weak var selectedImageImageView: UIImageView!
@@ -30,12 +34,12 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
     @IBAction func btnDone(_ sender: Any) {
         
         let cell = myTable.cellForRow(at: IndexPath(row: 0, section: 0)) as! CellName
-        //let cell1 = myTable.cellForRow(at: IndexPath(row: 1, section: 1)) as? CellPhoneType
-        //let cell2 = myTable.cellForRow(at: IndexPath(row: 0, section: 2)) as? CellEmail
-        //let cell3 = myTable.cellForRow(at: IndexPath(row: 0, section: 3)) as? CellCompany
-        //let cell4 = myTable.cellForRow(at: IndexPath(row: 0, section: 4)) as? CellDofB
-        //        if let cell5 = myTable.cellForRow(at: IndexPath(row: 0, section: 5)) as? CellId
-        //        { }
+//        let cell1 = myTable.cellForRow(at: IndexPath(row: 1, section: 1)) as? CellPhoneType
+//        let cell2 = myTable.cellForRow(at: IndexPath(row: 0, section: 2)) as? CellEmail
+//        let cell3 = myTable.cellForRow(at: IndexPath(row: 0, section: 3)) as? CellCompany
+//        let cell4 = myTable.cellForRow(at: IndexPath(row: 0, section: 4)) as? CellDofB
+//                if let cell5 = myTable.cellForRow(at: IndexPath(row: 0, section: 5)) as? CellId
+//                { }
         
         let numOfRows: Int = myTable.numberOfRows(inSection: 1)
         for i in 1..<numOfRows {
@@ -60,36 +64,17 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
             personDetails.ID = randomString(length: 6)
             self.dismiss(animated: true)
             
+            print("cccc")
             //phat tin hieu de them moi
             NotificationCenter.default.post(name: Notification.Name("UseNoti"), object: nil , userInfo: ["details" : personDetails])
-            //print("111a: \(personDetails)")
-            //print(personDetails)
         }
     }
     
-    //    @IBAction func onNameChange(_ sender: UITextField) {
-    //        print("", sender.text as Any)
-    //        //let name = personDetails.Name
-    //        //personDetails.Name = sender.text!
-    //    }
-    //
-    //    @IBAction func onEmailChange(_ sender: UITextField) {
-    //        print("a", sender.text as Any)
-    //        //let email = personDetails.Email
-    //        //personDetails.Email = sender.text!
-    //    }
-    //
-    //    @IBAction func onCompany(_ sender: UITextField) {
-    //        print("b", sender.text  as Any)
-    //        //personDetails.Company = sender.text!
-    //        //let company = personDetails.Company
-    //    }
-    //
-    //    @IBAction func onDOB(_ sender: UITextField) {
-    //        print("c", sender.text as Any)
-    //        //let dob = personDetails.DateOfBirth
-    //        //personDetails.DateOfBirth = sender.text!
-    //    }
+    ////////////////// use delegate
+//    class passData {
+//        var delegate: SenderViewControllerDelagate!
+//
+//    }
     
     
     @IBAction func selectImageButtonAction(_ sender: UIButton) {
@@ -209,7 +194,7 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
             if(indexPath.row == 0) {
                 let cell = myTable.dequeueReusableCell(withIdentifier: "CellPhoneAdd") as! CellPhoneAdd
                 
-                //cell.btnAdd.addTarget(self, action: #selector(self.onInputChange(_:)), for: .allEditingEvents)
+                cell.btnAdd.addTarget(self, action: #selector(self.onInputChange(_:)), for: .allEditingEvents)
                 return cell
             } else {
                 //print("Hello")

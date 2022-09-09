@@ -14,16 +14,6 @@ import UIKit
 //}
 
 class ViewController: UIViewController , UITableViewDataSource , UITableViewDelegate {    
-    //chuyển màn hình sang MH2
-    //    @IBAction func btnBackMH2(_ sender: Any) {
-    //        let scr = storyboard?.instantiateViewController(withIdentifier: "MH2Main") as! MH2MainVC
-    //        navigationController?.pushViewController(scr, animated: true)
-    //    }
-    
-    @IBOutlet var btnclickMHDeatail: DongMH1Cell!
-    
-    
-    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var myTable: UITableView!
     var DSTen:[Person] = [
@@ -39,7 +29,7 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         Person(id: "9", images: "", name: "hang", phoneNumber: [PhoneRow(phoneNumber: "0099", phoneType: "home", displayStatus: true)], email: "bon@444.com", company: "bbb", dateOfBirth: "04/08/2022"),
         Person(id: "10", images: "", name: "hung", phoneNumber: [PhoneRow(phoneNumber: "1010", phoneType: "home", displayStatus: true)], email: "nam55@.com", company: "nnn", dateOfBirth: "02/08/2022"),
         Person(id: "11", images: "", name: "linh", phoneNumber: [PhoneRow(phoneNumber: "1111", phoneType: "school", displayStatus: true)], email: "f88@.com", company: "tam", dateOfBirth: "05/08/2022"),
-        Person(id: "12", images: "", name: "luan", phoneNumber: [PhoneRow(phoneNumber: "1212", phoneType: "school", displayStatus: false)], email: "luan@999.com", company: "bang", dateOfBirth: "06/08/2022"),
+        Person(id: "12", images: "", name: "luan", phoneNumber: [PhoneRow(phoneNumber: "1212", phoneType: "school", displayStatus: true)], email: "luan@999.com", company: "bang", dateOfBirth: "06/08/2022"),
         
     ]
     // var titles: [String] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
@@ -64,10 +54,8 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
                 tenDict[String(prefixName)] = []
             }
             tenDict[String(prefixName)]?.append(person)
-            
         }
         searchDS = tenDict
-        
         //xếp tên theo kí tự        //var sectionTitle = [String]()
         sectionTitle = searchDS.keys.sorted()
         sectionTitle.sort()
@@ -82,23 +70,31 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     //        NotificationCenter.default.removeObserver(self)
     //     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        print("aaaaa")
         //cột nhận tín hiệu từ MH Sua12
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.classListUpdate2(_:)),
                                                name: Notification.Name("TestNotification"),
-                                               object: nil
-        )
+                                               object: nil)
         
         //cột nhận tín hiệu từ MH ThemMoi
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.classAddNew(_:)),
                                                name: Notification.Name("UseNoti"),
                                                object: nil);
-        
-        // NotificationCenter.default.removeObserver(self)
-        
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+//        NotificationCenter.default.removeObserver(self,
+//                                               name: Notification.Name("TestNotification"),
+//                                               object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                               name: Notification.Name("UseNoti"),
+                                               object: nil);
+    }
+    //ham thuc thi viec sua tu MH12
     @objc func classListUpdate2(_ notification: Notification) -> Void {
         print("co vao11")
         let details:Person = (notification.userInfo!["details"] as? Person)!
@@ -111,12 +107,9 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
                 person.Email = details.Email
                 person.DateOfBirth = details.DateOfBirth
                 person.Company = details.Company
-                break
+                //break
             }
         }
-        
-        //        let d: Person = DSTen.filter({$0.ID == details.ID}).first!
-        //        print("axbx", d.Name)
         
         tenDict = [String: [Person]]()
         searchDS = [String: [Person]]()
@@ -136,11 +129,10 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     }
     
     //ham them moi
-    
     @objc func classAddNew(_ notification : Notification){
+        print("bbb")
         let detailPerson:Person = (notification.userInfo!["details"] as? Person)!
         self.DSTen.append(detailPerson)
-        
         tenDict = [String: [Person]]()
         searchDS = [String: [Person]]()
         
@@ -158,9 +150,6 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         sectionTitle.sort()
         self.myTable.reloadData()
     }
-    
-    
-    
     
     //chuyển đến classListUpdate2
     //    @objc private func willEnterForeground(_ notification: Notification) {
@@ -226,30 +215,19 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         //yêu cầu nguồn dữ liệu trả về tiêu để(title) cho các section trong chế độ tableView
         return sectionTitle
     }
-    
     //  hiển thị ra = số lượng chữ cái trong bảng đếm được
     func numberOfSections(in tableView: UITableView) -> Int { //khai báo số lượng section
         //yêu cầu nguồn dữ liệu trả về số lượng section trong chế độ tableView
-        
         return  sectionTitle.count
     }
     
     //tao ra cac Section Header là a, b ,c ,...
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         return sectionTitle[section]
     }
     
-    
-    //    @IBAction func btnXong(_ sender: UIBarButtonItem) {
-    //        self.performSegue(withIdentifier: "addcontact", sender: self)
-    //    }
-    
     //dùng segue truyền data giữa các ViewController (truyền xuôi từ MH1 -> Mh Detail )
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        print("click vao cell")
-        
         if let vc = segue.destination as? MH1DetailVC,
            let cell = sender as? UITableViewCell,
            let indexPath = myTable.indexPath(for: cell) {
@@ -265,13 +243,9 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         print("click vao cell")
         let detail = self.storyboard?.instantiateViewController(withIdentifier: "MH1DetailVC" ) as! MH1DetailVC
         let items1 = searchDS[sectionTitle[indexPath.section]] ?? []
-        // let item = items1[indexPath.row] as? Person
-        //print("aaaaaaaa",item)
-        //let item: Person = items1[indexPath.row]
         detail.item = items1[indexPath.row]
         self.navigationController?.pushViewController(detail, animated: true)
     }
-    
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -281,28 +255,25 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     func tableView(_ tableView: UITableView, commit editingStyle:   UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             let persons = searchDS[sectionTitle[indexPath.section]] ?? []
-            let person:Person = persons[indexPath.row]
+            let person: Person = persons[indexPath.row]
             
             DSTen.removeAll(where: {$0.ID == person.ID})
             tenDict.removeAll()
+            
             for person in DSTen {
                 let prefixName = person.Name.prefix(1).lowercased()
                 if (!tenDict.keys.contains(String(prefixName))) {
                     tenDict[String(prefixName)] = []
                 }
+                
                 tenDict[String(prefixName)]?.append(person)
                 
             }
             searchDS = tenDict
-            
+
             myTable.reloadData()
         }
     }
-    
-    //hàm thực thi việc sửa từ MHSua12
-    
-    
-    
 }
 
 //chứa năng tìm kiếm
@@ -351,7 +322,28 @@ extension ViewController: UISearchBarDelegate {
 //}
 
 
-//extension ViewController: UpdateContactAfterProtocol {
+//extension ViewController: SenderViewControllerDelagate {
+//    func passpersonDetails(data: AnyObject) {
+//        self.DSTen.append(detailPerson)
+//
+//        tenDict = [String: [Person]]()
+//        searchDS = [String: [Person]]()
+//
+//        for person in DSTen {
+//            let _prefixName = person.Name.prefix(1).lowercased()
+//            if (!tenDict.keys.contains(String(_prefixName))) {
+//                tenDict[String(_prefixName)] = []
+//            }
+//            tenDict[String(_prefixName)]?.append(person)
+//        }
+//
+//        searchDS = tenDict
+//        //xếp tên theo kí tự        //var sectionTitle = [String]()
+//        sectionTitle = searchDS.keys.sorted()
+//        sectionTitle.sort()
+//        self.myTable.reloadData()
+//    }
+    
 
 //    func classAddNew(with detailPerson: Person){
 //        self.DSTen.append(detailPerson)
