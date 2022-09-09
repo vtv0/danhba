@@ -7,17 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7503261428C9E879000B4AA0 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 7503261328C9E879000B4AA0 /* Algorithms */; };
-		7503261728C9E880000B4AA0 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 7503261628C9E880000B4AA0 /* Algorithms */; };
-		7503261A28C9E891000B4AA0 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 7503261928C9E891000B4AA0 /* Algorithms */; };
-		7503261D28C9E925000B4AA0 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 7503261C28C9E925000B4AA0 /* Algorithms */; };
 		7509DC8728B470CD0003E408 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7509DC8628B470CD0003E408 /* Assets.xcassets */; };
 		751B3CAD28AE26000018F612 /* MH1ImageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751B3CAC28AE26000018F612 /* MH1ImageDetail.swift */; };
 		75362D6E28B7759E009BF8E8 /* CellDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75362D6D28B7759E009BF8E8 /* CellDetail.swift */; };
 		75973D1528AE3DE900B8125C /* MH1ThemMoi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75973D1428AE3DE900B8125C /* MH1ThemMoi.swift */; };
-		75A9BD2328CAD8A200731175 /* PhoneRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A9BD2228CAD8A200731175 /* PhoneRow.swift */; };
 		75A9BD2528CAD8C800731175 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A9BD2428CAD8C800731175 /* Person.swift */; };
 		75BAC9BC28AB435300E7EA55 /* SuaVC12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BAC9BB28AB435300E7EA55 /* SuaVC12.swift */; };
+		75BC523B28CB4BE60089FFF7 /* PhoneRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC523A28CB4BE60089FFF7 /* PhoneRow.swift */; };
 		75CB6006289BDB9700ECB28A /* DongMH1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CB6005289BDB9700ECB28A /* DongMH1Cell.swift */; };
 		75D5E2B028B86BF90008A504 /* CellModify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5E2AF28B86BF90008A504 /* CellModify.swift */; };
 		75D5E2B228B86C1E0008A504 /* CellPhoneTypeModify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5E2B128B86C1E0008A504 /* CellPhoneTypeModify.swift */; };
@@ -61,9 +57,9 @@
 		751B3CAC28AE26000018F612 /* MH1ImageDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MH1ImageDetail.swift; sourceTree = "<group>"; };
 		75362D6D28B7759E009BF8E8 /* CellDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDetail.swift; sourceTree = "<group>"; };
 		75973D1428AE3DE900B8125C /* MH1ThemMoi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MH1ThemMoi.swift; sourceTree = "<group>"; };
-		75A9BD2228CAD8A200731175 /* PhoneRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneRow.swift; sourceTree = SOURCE_ROOT; };
 		75A9BD2428CAD8C800731175 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		75BAC9BB28AB435300E7EA55 /* SuaVC12.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuaVC12.swift; sourceTree = "<group>"; };
+		75BC523A28CB4BE60089FFF7 /* PhoneRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneRow.swift; sourceTree = "<group>"; };
 		75CB6005289BDB9700ECB28A /* DongMH1Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DongMH1Cell.swift; sourceTree = "<group>"; };
 		75D5E2AF28B86BF90008A504 /* CellModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModify.swift; sourceTree = "<group>"; };
 		75D5E2B128B86C1E0008A504 /* CellPhoneTypeModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPhoneTypeModify.swift; sourceTree = "<group>"; };
@@ -94,10 +90,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7503261A28C9E891000B4AA0 /* Algorithms in Frameworks */,
-				7503261728C9E880000B4AA0 /* Algorithms in Frameworks */,
-				7503261428C9E879000B4AA0 /* Algorithms in Frameworks */,
-				7503261D28C9E925000B4AA0 /* Algorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,7 +190,6 @@
 		75D6DEBC288659CA008E3970 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
-				75A9BD2228CAD8A200731175 /* PhoneRow.swift */,
 				75A9BD2428CAD8C800731175 /* Person.swift */,
 				75BAC9BD28AB43A800E7EA55 /* MH1 */,
 				75D6DEBD288659CA008E3970 /* AppDelegate.swift */,
@@ -206,6 +197,7 @@
 				75D6DEC8288659CB008E3970 /* LaunchScreen.storyboard */,
 				75D6DECB288659CB008E3970 /* Info.plist */,
 				75D6DEC3288659CA008E3970 /* Main.storyboard */,
+				75BC523A28CB4BE60089FFF7 /* PhoneRow.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -259,10 +251,6 @@
 			);
 			name = Contacts;
 			packageProductDependencies = (
-				7503261328C9E879000B4AA0 /* Algorithms */,
-				7503261628C9E880000B4AA0 /* Algorithms */,
-				7503261928C9E891000B4AA0 /* Algorithms */,
-				7503261C28C9E925000B4AA0 /* Algorithms */,
 			);
 			productName = Contacts;
 			productReference = 75D6DEBA288659CA008E3970 /* Contacts.app */;
@@ -337,10 +325,6 @@
 			);
 			mainGroup = 75D6DEB1288659CA008E3970;
 			packageReferences = (
-				7503261228C9E879000B4AA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
-				7503261528C9E880000B4AA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
-				7503261828C9E891000B4AA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
-				7503261B28C9E925000B4AA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = 75D6DEBB288659CA008E3970 /* Products */;
 			projectDirPath = "";
@@ -397,12 +381,12 @@
 				75BAC9BC28AB435300E7EA55 /* SuaVC12.swift in Sources */,
 				75A9BD2528CAD8C800731175 /* Person.swift in Sources */,
 				75CB6006289BDB9700ECB28A /* DongMH1Cell.swift in Sources */,
+				75BC523B28CB4BE60089FFF7 /* PhoneRow.swift in Sources */,
 				75F2A64528B70B090063D16A /* CellPhoneAdd.swift in Sources */,
 				75E8762B289CBB5500DCFE0B /* MH1DetailVC.swift in Sources */,
 				75F2A64928B70C760063D16A /* CellEmail.swift in Sources */,
 				75362D6E28B7759E009BF8E8 /* CellDetail.swift in Sources */,
 				75D6DEC0288659CA008E3970 /* SceneDelegate.swift in Sources */,
-				75A9BD2328CAD8A200731175 /* PhoneRow.swift in Sources */,
 				75F2A64F28B723F80063D16A /* CellId.swift in Sources */,
 				75F2A64728B70C540063D16A /* CellPhoneType.swift in Sources */,
 			);
@@ -742,64 +726,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		7503261228C9E879000B4AA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-algorithms.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		7503261528C9E880000B4AA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-algorithms.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		7503261828C9E891000B4AA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-algorithms.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		7503261B28C9E925000B4AA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-algorithms.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		7503261328C9E879000B4AA0 /* Algorithms */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7503261228C9E879000B4AA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
-			productName = Algorithms;
-		};
-		7503261628C9E880000B4AA0 /* Algorithms */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7503261228C9E879000B4AA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
-			productName = Algorithms;
-		};
-		7503261928C9E891000B4AA0 /* Algorithms */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7503261228C9E879000B4AA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
-			productName = Algorithms;
-		};
-		7503261C28C9E925000B4AA0 /* Algorithms */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7503261228C9E879000B4AA0 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
-			productName = Algorithms;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 75D6DEB2288659CA008E3970 /* Project object */;
 }
