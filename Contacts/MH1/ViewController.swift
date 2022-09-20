@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import RealmSwift
+
+
 
 //protocol UpdateContactAfterProtocol: class {
 //    func classListUpdate( with detailPerson: Person)
@@ -13,31 +16,21 @@ import UIKit
 //    func classListUpdate2( with detailPerson: Person) -> Bool
 //}
 
-class ViewController: UIViewController , UITableViewDataSource , UITableViewDelegate {    
+class ViewController: UIViewController , UITableViewDataSource , UITableViewDelegate {
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var myTable: UITableView!
-    var DSTen:[Person] = [
-        Person(id: "0", images: "", name: "nhu", phoneNumber: [PhoneRow(phoneNumber: "0000", phoneType: "mobile", displayStatus: true)], email: "nhu000@.com", company: "aa", dateOfBirth:  "08/08/2022"),
-        Person(id: "1", images: "", name: "lan", phoneNumber: [PhoneRow(phoneNumber: "0011", phoneType: "home", displayStatus: true)], email: "lan111@.com", company: "bb", dateOfBirth: "07/08/2022"),
-        Person(id: "2", images: "", name: "an", phoneNumber: [PhoneRow(phoneNumber: "0022", phoneType: "main", displayStatus: true)], email: "ba0@333.com", company: "baba0", dateOfBirth: "04/08/2022"),
-        Person(id: "3", images: "", name: "ba", phoneNumber: [PhoneRow(phoneNumber: "0033", phoneType: "company", displayStatus: true)], email: "ba1@333.com", company: "baba1", dateOfBirth: "24/08/2022"),
-        Person(id: "4", images: "", name: "nang", phoneNumber: [PhoneRow(phoneNumber: "0044", phoneType: "mobile", displayStatus: true)], email: "ba2@333.com", company: "baba2", dateOfBirth: "14/08/2022"),
-        Person(id: "5", images: "", name: "bang", phoneNumber: [PhoneRow(phoneNumber: "0055", phoneType: "mobile", displayStatus: true)], email: "ba3@333.com", company: "baba3" , dateOfBirth: "04/08/2022"),
-        Person(id: "6", images: "", name: "tu", phoneNumber: [PhoneRow(phoneNumber: "0066", phoneType: "mobile", displayStatus: true)], email: "ba4@333.com", company: "baba4", dateOfBirth: "04/08/2022"),
-        Person(id: "7", images: "", name: "tung", phoneNumber: [PhoneRow(phoneNumber: "0077", phoneType: "home", displayStatus: true)], email: "ba5@333.com", company: "baba5", dateOfBirth: "04/08/2022"),
-        Person(id: "8", images: "", name: "ha", phoneNumber: [PhoneRow(phoneNumber: "0088", phoneType: "company", displayStatus: true)], email: "ha@010.com", company: "b1b1", dateOfBirth: "01/08/2022"),
-        Person(id: "9", images: "", name: "hang", phoneNumber: [PhoneRow(phoneNumber: "0099", phoneType: "home", displayStatus: true)], email: "bon@444.com", company: "bbb", dateOfBirth: "04/08/2022"),
-        Person(id: "10", images: "", name: "hung", phoneNumber: [PhoneRow(phoneNumber: "1010", phoneType: "home", displayStatus: true)], email: "nam55@.com", company: "nnn", dateOfBirth: "02/08/2022"),
-        Person(id: "11", images: "", name: "linh", phoneNumber: [PhoneRow(phoneNumber: "1111", phoneType: "school", displayStatus: true)], email: "f88@.com", company: "tam", dateOfBirth: "05/08/2022"),
-        Person(id: "12", images: "", name: "luan", phoneNumber: [PhoneRow(phoneNumber: "1212", phoneType: "school", displayStatus: true)], email: "luan@999.com", company: "bang", dateOfBirth: "06/08/2022"),
-        
-    ]
+
+    //khoi tao data manager
+    var dbManager: DBManager!
+    var DSTen: Results<Person>!
     // var titles: [String] = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
     
     var searchDS = [String: [Person]]()
     
     var sectionTitle = [String]()
     var tenDict = [String: [Person]]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,9 +40,14 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         myTable.delegate = self
         
         myTable.dataSource = self  // dòng này cấu hình cho myTable để cho 2 hàm cellForRowAt, numberRowInSection
+        //khoi tao dbManager
+        dbManager = DBManager.shareInstance
+        
+        //lay ds tu DL
+        DSTen = dbManager.getDataFromDB()
         
         for person in DSTen {
-            let prefixName = person.Name.prefix(1).lowercased()
+            let prefixName = person.name.prefix(1).lowercased()
             if (!tenDict.keys.contains(String(prefixName))) {
                 tenDict[String(prefixName)] = []
             }
@@ -59,85 +57,80 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         //xếp tên theo kí tự        //var sectionTitle = [String]()
         sectionTitle = searchDS.keys.sorted()
         sectionTitle.sort()
+        
+        
     }
     
-    //    override func viewWillDisappear(_ animated: Bool) {
-    //        super.viewWillDisappear(true)
-    //        print("zzzzz")
-    //        func removeObserver(_: Any, name: NSNotification.Name? , Object: Any) {
-    //
-    //        }
-    //        NotificationCenter.default.removeObserver(self)
-    //     }
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        print("aaaaa")
-        //cột nhận tín hiệu từ MH Sua12
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.classListUpdate2(_:)),
-                                               name: Notification.Name("TestNotification"),
-                                               object: nil)
+        super.viewWillAppear(animated)
         
-        //cột nhận tín hiệu từ MH ThemMoi
+        
+        //cột nhận tín hiệu từ MH Sua12
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(self.classListUpdate2(_:)),
+//                                               name: Notification.Name("TestNotification"),
+//                                               object: nil)
+        
+       // cột nhận tín hiệu từ MH ThemMoi
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.classAddNew(_:)),
                                                name: Notification.Name("UseNoti"),
                                                object: nil);
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(true)
+////        NotificationCenter.default.removeObserver(self,
+////                                               name: Notification.Name("TestNotification"),
+////                                               object: nil)
 //        NotificationCenter.default.removeObserver(self,
-//                                               name: Notification.Name("TestNotification"),
-//                                               object: nil)
-        NotificationCenter.default.removeObserver(self,
-                                               name: Notification.Name("UseNoti"),
-                                               object: nil);
-    }
+//                                               name: Notification.Name("UseNoti"),
+//                                               object: nil);
+//    }
     //ham thuc thi viec sua tu MH12
-    @objc func classListUpdate2(_ notification: Notification) -> Void {
-        print("co vao11")
-        let details:Person = (notification.userInfo!["details"] as? Person)!
-        
-        for person in DSTen {
-            if person.ID == details.ID {
-                person.Images = details.Images
-                person.Name = details.Name
-                person.PhoneNumber = details.PhoneNumber
-                person.Email = details.Email
-                person.DateOfBirth = details.DateOfBirth
-                person.Company = details.Company
-                //break
-            }
-        }
-        
-        tenDict = [String: [Person]]()
-        searchDS = [String: [Person]]()
-        for person in DSTen {
-            let prefixName = person.Name.prefix(1).lowercased()
-            if (!tenDict.keys.contains(String(prefixName))) {
-                tenDict[String(prefixName)] = []
-            }
-            tenDict[String(prefixName)]?.append(person)
-        }
-        
-        searchDS = tenDict
-        //xếp tên theo kí tự        //var sectionTitle = [String]()
-        sectionTitle = searchDS.keys.sorted()
-        sectionTitle.sort()
-        myTable.reloadData()
-    }
+//    @objc func classListUpdate2(_ notification: Notification) -> Void {
+//        print("co vao11")
+//        let details:Person = (notification.userInfo!["details"] as? Person)!
+//
+//        for person in DSTen {
+//            if person.ID == details.ID {
+//                person.Images = details.Images
+//                person.Name = details.Name
+//                person.PhoneNumber = details.PhoneNumber
+//                person.Email = details.Email
+//                person.DateOfBirth = details.DateOfBirth
+//                person.Company = details.Company
+//                //break
+//            }
+//        }
+//
+//        tenDict = [String: [Person]]()
+//        searchDS = [String: [Person]]()
+//        for person in DSTen {
+//            let prefixName = person.Name.prefix(1).lowercased()
+//            if (!tenDict.keys.contains(String(prefixName))) {
+//                tenDict[String(prefixName)] = []
+//            }
+//            tenDict[String(prefixName)]?.append(person)
+//        }
+//
+//        searchDS = tenDict
+//        //xếp tên theo kí tự        //var sectionTitle = [String]()
+//        sectionTitle = searchDS.keys.sorted()
+//        sectionTitle.sort()
+//        myTable.reloadData()
+//    }
     
     //ham them moi
     @objc func classAddNew(_ notification : Notification){
         print("bbb")
-        let detailPerson:Person = (notification.userInfo!["details"] as? Person)!
-        self.DSTen.append(detailPerson)
+        var detailPerson: Person = (notification.userInfo!["details"] as? Person)!
+        DSTen = dbManager.getDataFromDB()
         tenDict = [String: [Person]]()
         searchDS = [String: [Person]]()
         
         for person in DSTen {
-            let prefixName = person.Name.prefix(1).lowercased()
+            let prefixName = person.name.prefix(1).lowercased()
             if (!tenDict.keys.contains(String(prefixName))) {
                 tenDict[String(prefixName)] = []
             }
@@ -145,7 +138,7 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         }
         
         searchDS = tenDict
-        //xếp tên theo kí tự        //var sectionTitle = [String]()
+        //xếp tên theo kí tự    //var sectionTitle = [String]()
         sectionTitle = searchDS.keys.sorted()
         sectionTitle.sort()
         self.myTable.reloadData()
@@ -200,7 +193,7 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         let items = searchDS[sectionTitle[indexPath.section]] ?? []
         if !items.isEmpty {
             let item = items[indexPath.row]
-            cell.lblName.text = item.Name
+            cell.lblName.text = item.name
             
             //cell.lblPhoneNumber.text = item.PhoneNumber
             
@@ -234,7 +227,7 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
             let items = searchDS[sectionTitle[indexPath.section]] ?? []
             let item: Person = items[indexPath.row]
             vc.item = item
-            
+
             //vc.listDelegrate = self
         }
     }
@@ -256,21 +249,20 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         if (editingStyle == .delete) {
             let persons = searchDS[sectionTitle[indexPath.section]] ?? []
             let person: Person = persons[indexPath.row]
-            
-            DSTen.removeAll(where: {$0.ID == person.ID})
+
+            //DSTen.removeAll(where: {$0.ID == person.id})
+            dbManager.deleteItemFromDB(object: person)
             tenDict.removeAll()
             
             for person in DSTen {
-                let prefixName = person.Name.prefix(1).lowercased()
+                let prefixName = person.name.prefix(1).lowercased()
                 if (!tenDict.keys.contains(String(prefixName))) {
                     tenDict[String(prefixName)] = []
                 }
-                
+
                 tenDict[String(prefixName)]?.append(person)
-                
             }
             searchDS = tenDict
-
             myTable.reloadData()
         }
     }
@@ -289,7 +281,7 @@ extension ViewController: UISearchBarDelegate {
                     searchDS[keyD] = [Person]()    // thì gán key trong SearchDS là một mảng Person
                 }
                 for person in valueD {
-                    if (person.Name.lowercased().contains(searchText.lowercased())) /*|| (person.PhoneNumber.contains(searchText)) */{
+                    if (person.name.lowercased().contains(searchText.lowercased())) /*|| (person.PhoneNumber.contains(searchText)) */{
                         searchDS[keyD]?.append(person)
                     }
                     //                    if tenDict.contains(searchText.lowercased()) {  //không phân biệt chữ hoa hay thường trong SearchBar

@@ -6,11 +6,7 @@
 //
 
 import UIKit
-//import Contacts
-//protocol SenderViewControllerDelagate {
-//    func passpersonDetails(data: AnyObject)
-//}
-
+import RealmSwift
 
 class MH1ThemMoi: UIViewController , UITableViewDataSource {
     @IBOutlet weak var selectedImageImageView: UIImageView!
@@ -20,13 +16,25 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
     
     @IBOutlet weak var myTable: UITableView!
     
-    var personDetails: Person = Person(id: "", images: "", name: "", email: "", company: "", dateOfBirth: "")
+    var personDetails: Person = Person()
     
     var selectedImage: UIImage!
     
     var documentsURL: URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        selectedImageImageView.layer.cornerRadius = selectedImageImageView.frame.size.width / 2
+        //bo tron khi hinh rong hon
+        selectedImageImageView.clipsToBounds = true
+        myTable.dataSource = self
+        
+    }
+    
+    
+    
     @IBAction func btnCancel(_ sender: Any) {
         dismiss(animated: true)
     }
@@ -34,48 +42,54 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
     @IBAction func btnDone(_ sender: Any) {
         
         let cell = myTable.cellForRow(at: IndexPath(row: 0, section: 0)) as! CellName
-//        let cell1 = myTable.cellForRow(at: IndexPath(row: 1, section: 1)) as? CellPhoneType
-//        let cell2 = myTable.cellForRow(at: IndexPath(row: 0, section: 2)) as? CellEmail
-//        let cell3 = myTable.cellForRow(at: IndexPath(row: 0, section: 3)) as? CellCompany
-//        let cell4 = myTable.cellForRow(at: IndexPath(row: 0, section: 4)) as? CellDofB
-//                if let cell5 = myTable.cellForRow(at: IndexPath(row: 0, section: 5)) as? CellId
-//                { }
+        //        let cell1 = myTable.cellForRow(at: IndexPath(row: 1, section: 1)) as? CellPhoneType
+        //        let cell2 = myTable.cellForRow(at: IndexPath(row: 0, section: 2)) as? CellEmail
+        //        let cell3 = myTable.cellForRow(at: IndexPath(row: 0, section: 3)) as? CellCompany
+        //        let cell4 = myTable.cellForRow(at: IndexPath(row: 0, section: 4)) as? CellDofB
+        //                if let cell5 = myTable.cellForRow(at: IndexPath(row: 0, section: 5)) as? CellId
+        //                { }
         
         let numOfRows: Int = myTable.numberOfRows(inSection: 1)
-        for i in 1..<numOfRows {
-            let cellAtIdx = myTable.cellForRow(at: IndexPath(row: i, section: 1)) as! CellPhoneType
-            
-            let phoneType = cellAtIdx.lblPhoneType.text
-            let phoneNumber = cellAtIdx.txtPhoneNumber.text
-            
-            let personDetails = personDetails.PhoneNumber.filter({$0.PhoneType == phoneType}).first!
-            personDetails.PhoneNumber = phoneNumber!
-            personDetails.DisplayStatus = true
-        }
+        //        for i in 1..<numOfRows {
+        //            let cellAtIdx = myTable.cellForRow(at: IndexPath(row: i, section: 1)) as! CellPhoneType
+        //
+        //            let phoneType = cellAtIdx.lblPhoneType.text
+        //            let phoneNumber = cellAtIdx.txtPhoneNumber.text
+        //
+        //            let personDetails = personDetails.PhoneNumber.filter({$0.PhoneType == phoneType}).first!
+        //            personDetails.PhoneNumber = phoneNumber!
+        //            personDetails.DisplayStatus = true
+        //        }
         
         if (cell.txtName.text != "") {
+           
+            let person = Person()
+            person.name = personDetails.name
+            person.email = personDetails.email
+            person.company = personDetails.company
+            person.dob = personDetails.dob
+            DBManager.shareInstance.addData(object: person)
+            
             //print("nhay vao xong MH Them moi")
             
-            personDetails.Images = self.save(image: selectedImage) ?? ""
+            // personDetails.Images = self.save(image: selectedImage) ?? ""
             
             //            print("", personDetails.PhoneNumber[1].DisplayStatus)
             //            let personDetails = Person(id: randomString(length: 6), images: selectedImageName, name: cell.txtName.text ?? "", phoneNumber: personDetails.PhoneNumber , email: cell2?.txtEmail.text ?? "", company: cell3?.txtCompany.text ?? "", dateOfBirth: cell4?.txtDOB.text ?? "")
             
-            personDetails.ID = randomString(length: 6)
+            //   personDetails.id = randomString(length: 6)
+            
+            
+            myTable.reloadData()
             self.dismiss(animated: true)
             
-            print("cccc")
+            print("them moi phat Th")
             //phat tin hieu de them moi
             NotificationCenter.default.post(name: Notification.Name("UseNoti"), object: nil , userInfo: ["details" : personDetails])
         }
     }
     
-    ////////////////// use delegate
-//    class passData {
-//        var delegate: SenderViewControllerDelagate!
-//
-//    }
-    
+  
     
     @IBAction func selectImageButtonAction(_ sender: UIButton) {
         print("ấn  thêm ảnh ở MHThemMoi")
@@ -90,32 +104,32 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
     
     
     
-    @IBAction func btnAddRow(_ sender: Any) {
-        let hiddenRecords = personDetails.PhoneNumber.filter({$0.DisplayStatus == false})
-        if !hiddenRecords.isEmpty {
-            let recordToBeInsert: PhoneRow = hiddenRecords.first!
-            recordToBeInsert.DisplayStatus = true
-            //                        myTable.performBatchUpdates({
-            //                            myTable.insertRows(at: [IndexPath(row: 1, section: 1)], with: .left)
-            //                        })
-            
-            myTable.reloadData()
-        }
-    }
+    //    @IBAction func btnAddRow(_ sender: Any) {
+    //        let hiddenRecords = personDetails.PhoneNumber.filter({$0.DisplayStatus == false})
+    //        if !hiddenRecords.isEmpty {
+    //            let recordToBeInsert: PhoneRow = hiddenRecords.first!
+    //            recordToBeInsert.DisplayStatus = true
+    //            //                        myTable.performBatchUpdates({
+    //            //                            myTable.insertRows(at: [IndexPath(row: 1, section: 1)], with: .left)
+    //            //                        })
+    //
+    //            myTable.reloadData()
+    //        }
+    //    }
     
-    @IBAction func btnDeleteRow(_ sender: UIButton) {
-        let point = sender.convert(CGPoint.zero, to: myTable)
-        guard let indexPath = myTable.indexPathForRow(at: point) else {return}
-        let cell = myTable.cellForRow(at: indexPath) as! CellPhoneType
-        let phoneType = cell.lblPhoneType.text!
-        
-        let selectedPhoneType: PhoneRow = personDetails.PhoneNumber.filter({$0.PhoneType == phoneType}).first!
-        //if selectedPhoneType != nil {
-        selectedPhoneType.DisplayStatus = false
-        
-        //}
-        myTable.reloadData()
-    }
+    //    @IBAction func btnDeleteRow(_ sender: UIButton) {
+    //        let point = sender.convert(CGPoint.zero, to: myTable)
+    //        guard let indexPath = myTable.indexPathForRow(at: point) else {return}
+    //        let cell = myTable.cellForRow(at: indexPath) as! CellPhoneType
+    //        let phoneType = cell.lblPhoneType.text!
+    //
+    //        let selectedPhoneType: PhoneRow = personDetails.PhoneNumber.filter({$0.PhoneType == phoneType}).first!
+    //        //if selectedPhoneType != nil {
+    //        selectedPhoneType.DisplayStatus = false
+    //
+    //        //}
+    //        myTable.reloadData()
+    //    }
     
     private func save(image: UIImage!) -> String? {
         if (image != nil) {
@@ -145,18 +159,11 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
     }
     
     
-    func randomString(length: Int) -> String {
-        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        return String((0..<length).map{ _ in letters.randomElement()! })
-    }
+//    func randomString(length: Int) -> String {
+//        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+//        return String((0..<length).map{ _ in letters.randomElement()! })
+//    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        selectedImageImageView.layer.cornerRadius = selectedImageImageView.frame.size.width / 2
-        //bo tron khi hinh rong hon
-        selectedImageImageView.clipsToBounds = true
-        myTable.dataSource = self
-    }
     //    override func viewWillDisappear(_ animated: Bool) {
     //        super.viewWillDisappear(animated)
     //        print("a the a ")
@@ -175,7 +182,8 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
             return 1
             
         } else if (section == 1) {
-            return personDetails.PhoneNumber.filter({$0.DisplayStatus == true}).count + 1
+//             return personDetails.phones.filter({$0.DisplayStatus == true}).count + 1
+            return 3
             
         } else {
             return 1
@@ -200,10 +208,10 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
                 //print("Hello")
                 let cell = myTable.dequeueReusableCell(withIdentifier: "CellPhoneType") as! CellPhoneType
                 
-                let visibleRecords = personDetails.PhoneNumber.filter({$0.DisplayStatus == true})
-                let item1 = visibleRecords[indexPath.row - 1]
-                cell.lblPhoneType.text = item1.PhoneType
-                cell.txtPhoneNumber.text = item1.PhoneNumber
+//                let visibleRecords = personDetails.PhoneNumber.filter({$0.DisplayStatus == true})
+//                let item1 = visibleRecords[indexPath.row - 1]
+//                cell.lblPhoneType.text = item1.PhoneType
+//                cell.txtPhoneNumber.text = item1.PhoneNumber
                 
                 
                 cell.txtPhoneNumber.addTarget(self, action: #selector(self.onInputChange(_:)), for: .editingChanged)
@@ -235,15 +243,13 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
             return cell
         } else {
             let cell = myTable.dequeueReusableCell(withIdentifier: "CellId")
-            
             return cell!
         }
     }
     
-    
-    @objc func onInputNameChange(_ sender: UITextField) {
+   @objc func onInputNameChange(_ sender: UITextField) {
         print("name", sender.text ?? "hon")
-        personDetails.Name = sender.text ?? ""
+            personDetails.name = sender.text ?? ""
         
     }
     @objc func onInputChange(_ sender: UITextField) {
@@ -253,49 +259,49 @@ class MH1ThemMoi: UIViewController , UITableViewDataSource {
         // personDetails.phoneNumber = ..
         
         print("MH ThemSDT", tag)
-        switch tag {
-        case 0:
-            //print("0",sender.text)
-            personDetails.PhoneNumber[0].PhoneNumber = sender.text ?? ""
-            
-        case 1:
-            //print("1",sender.text)
-            
-            personDetails.PhoneNumber[1].PhoneNumber = sender.text ?? ""
-            
-            
-        case 2:
-            //print("2", sender.text)
-            personDetails.PhoneNumber[2].PhoneNumber = sender.text ?? ""
-            
-        case 3:
-            //print("3", sender.text)
-            personDetails.PhoneNumber[3].PhoneNumber = sender.text ?? ""
-            
-        case 4:
-            //print("4", sender.text)
-            personDetails.PhoneNumber[4].PhoneNumber = sender.text ?? ""
-            
-        case 5:
-            //print("5", sender.text)
-            personDetails.PhoneNumber[5].PhoneNumber = sender.text ?? ""
-            
-            
-        default:
-            print("69", sender.text!)
+        //        switch tag {
+        //        case 0:
+        //            //print("0",sender.text)
+        //            personDetails.PhoneNumber[0].PhoneNumber = sender.text ?? ""
+        //
+        //        case 1:
+        //            //print("1",sender.text)
+        //
+        //            personDetails.PhoneNumber[1].PhoneNumber = sender.text ?? ""
+        //
+        //
+        //        case 2:
+        //            //print("2", sender.text)
+        //            personDetails.PhoneNumber[2].PhoneNumber = sender.text ?? ""
+        //
+        //        case 3:
+        //            //print("3", sender.text)
+        //            personDetails.PhoneNumber[3].PhoneNumber = sender.text ?? ""
+        //
+        //        case 4:
+        //            //print("4", sender.text)
+        //            personDetails.PhoneNumber[4].PhoneNumber = sender.text ?? ""
+        //
+        //        case 5:
+        //            //print("5", sender.text)
+        //            personDetails.PhoneNumber[5].PhoneNumber = sender.text ?? ""
+        //
+        //
+        //        default:
+        //            print("69", sender.text!)
+        //        }
+    }
+    
+        @objc func onInputEmailChange(_ sender: UITextField) {
+            personDetails.email = sender.text ?? ""
         }
-    }
     
-    @objc func onInputEmailChange(_ sender: UITextField) {
-        personDetails.Email = sender.text ?? ""
-    }
-    
-    @objc func onInputCompanyChange(_ sender: UITextField) {
-        personDetails.Company = sender.text ?? ""
-    }
-    @objc func onInputDOBChange(_ sender: UITextField) {
-        personDetails.DateOfBirth = sender.text ?? ""
-    }
+        @objc func onInputCompanyChange(_ sender: UITextField) {
+            personDetails.company = sender.text ?? ""
+        }
+        @objc func onInputDOBChange(_ sender: UITextField) {
+            personDetails.dob = sender.text ?? ""
+        }
 }
 
 extension MH1ThemMoi: UINavigationControllerDelegate, UIImagePickerControllerDelegate {

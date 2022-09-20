@@ -1,31 +1,26 @@
+////
+////  AssetMH3.swift
+////  Contacts
+////
+////  Created by Vuong The Vu on 24/08/2022.
+////
 //
-//  AssetMH3.swift
-//  Contacts
+//import Foundation
+//import RealmSwift
 //
-//  Created by Vuong The Vu on 24/08/2022.
+//class PhoneRow :Object {
+//    public var PhoneNumber : String
+//    public var PhoneType : String
+//    public var DisplayStatus : Bool = false
 //
-
-import Foundation
-
-
-class PhoneRow : NSObject , NSCopying {
-    public var PhoneNumber : String
-    public var PhoneType : String
-    public var DisplayStatus : Bool = false
-
-
-    init(phoneNumber: String , phoneType: String, displayStatus: Bool) {
-        self.PhoneNumber = phoneNumber
-        self.PhoneType = phoneType
-        self.DisplayStatus = displayStatus
-    }
-
-    init(phoneNumber: String , phoneType: String) {
-        self.PhoneNumber = phoneNumber
-        self.PhoneType = phoneType
-    }
-
-    func copy(with zone : NSZone? = nil) -> Any {
-        return PhoneRow(phoneNumber: PhoneNumber, phoneType: PhoneType, displayStatus: DisplayStatus)
-    }
-}
+//
+//    init(phoneNumber: String , phoneType: String, displayStatus: Bool) {
+//        self.PhoneNumber = phoneNumber
+//        self.PhoneType = phoneType
+//        self.DisplayStatus = displayStatus
+//    }
+//
+//    
+//
+//    
+//}
