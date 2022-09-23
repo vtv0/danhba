@@ -78,10 +78,10 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         
         
         //cột nhận tín hiệu từ MH Sua12
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(self.classListUpdate2(_:)),
-//                                               name: Notification.Name("TestNotification"),
-//                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.classListUpdate2(_:)),
+                                               name: Notification.Name("TestNotification"),
+                                               object: nil)
         
        // cột nhận tín hiệu từ MH ThemMoi
         NotificationCenter.default.addObserver(self,
@@ -100,38 +100,38 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
 //                                               object: nil);
 //    }
     //ham thuc thi viec sua tu MH12
-//    @objc func classListUpdate2(_ notification: Notification) -> Void {
-//        print("co vao11")
-//        let details:Person = (notification.userInfo!["details"] as? Person)!
-//
+    @objc func classListUpdate2(_ notification: Notification) -> Void {
+        print("co vao11")
+        let details:Person = (notification.userInfo!["details"] as? Person)!
+
 //        for person in DSTen {
-//            if person.ID == details.ID {
-//                person.Images = details.Images
-//                person.Name = details.Name
-//                person.PhoneNumber = details.PhoneNumber
-//                person.Email = details.Email
-//                person.DateOfBirth = details.DateOfBirth
-//                person.Company = details.Company
+//            if person.id == details.id {
+//                person.image = details.image
+//                person.name = details.name
+//                person.phone = details.phone
+//                person.email = details.email
+//                person.dob = details.dob
+//                person.company = details.company
 //                //break
 //            }
 //        }
-//
-//        tenDict = [String: [Person]]()
-//        searchDS = [String: [Person]]()
-//        for person in DSTen {
-//            let prefixName = person.Name.prefix(1).lowercased()
-//            if (!tenDict.keys.contains(String(prefixName))) {
-//                tenDict[String(prefixName)] = []
-//            }
-//            tenDict[String(prefixName)]?.append(person)
-//        }
-//
-//        searchDS = tenDict
-//        //xếp tên theo kí tự        //var sectionTitle = [String]()
-//        sectionTitle = searchDS.keys.sorted()
-//        sectionTitle.sort()
-//        myTable.reloadData()
-//    }
+
+        tenDict = [String: [Person]]()
+        searchDS = [String: [Person]]()
+        for person in DSTen {
+            let prefixName = person.name.prefix(1).lowercased()
+            if (!tenDict.keys.contains(String(prefixName))) {
+                tenDict[String(prefixName)] = []
+            }
+            tenDict[String(prefixName)]?.append(person)
+        }
+
+        searchDS = tenDict
+        //xếp tên theo kí tự        //var sectionTitle = [String]()
+        sectionTitle = searchDS.keys.sorted()
+        sectionTitle.sort()
+        myTable.reloadData()
+    }
     
     //ham them moi
     @objc func classAddNew(_ notification : Notification){

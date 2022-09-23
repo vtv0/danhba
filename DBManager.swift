@@ -36,10 +36,16 @@ class Person : Object {
 //            PhoneRow(phoneNumber: "", phoneType: "company fax", displayStatus: false)
 //        ]
     
-    
+    func Person(value: Person) {
+        self.image = value.image
+        self.name = value.name
+        self.email = value.email
+        self.company = value.company
+        self.dob = value.dob
+    }
     
     //danh dau la khoa chinh
-    func primaryKey() -> String {
+    override static func primaryKey() -> String {
         return "id"
     }
 }
@@ -79,8 +85,6 @@ extension RealmCollection {
                 schemaVersion: 1,
                 migrationBlock: { migration, oldSchemaVersion in
                     if oldSchemaVersion < 1 {
-
-                        
                     }
                 }
             )
@@ -134,7 +138,7 @@ extension RealmCollection {
         func updateToDB(object: Person) -> Bool {
             do {
                 try database.write({
-                    // database.add(object, update: true)
+                    database.add(object,update: .modified)
                 })
                 return true
             }catch {

@@ -23,10 +23,12 @@ class MH1DetailVC: UIViewController , UITableViewDataSource, UITableViewDelegate
     }
     @IBOutlet weak var myTable: UITableView!
     @IBOutlet weak var imgImage: UIImageView!
+    
     @IBAction func btnEdit(_ sender: Any) {
         print("click vao btnEdit")
         guard let mhSua =  self.storyboard?.instantiateViewController(identifier:  "SuaVC12") as? SuaVC12 else {return}
         mhSua.personDetailsOriginal = item!
+        
         navigationController?.pushViewController(mhSua, animated: true)
         //                guard let person = item else {return}
         //        clousure(person)
@@ -111,12 +113,12 @@ class MH1DetailVC: UIViewController , UITableViewDataSource, UITableViewDelegate
     }
     
     //MH1 DetailVC nhan dc notifcation tu MHSua12
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        NotificationCenter.default.addObserver(self,
-    //                                               selector: #selector(self.classListUpdate2(_:)),
-    //                                               name: Notification.Name("TestNotification"),
-    //                                               object: nil)
-    //    }
+        override func viewWillAppear(_ animated: Bool) {
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(self.classListUpdate2(_:)),
+                                                   name: Notification.Name("TestNotification"),
+                                                   object: nil)
+        }
     
     
     //    @objc private func willEnterForeground(_ notification: Notification) {
@@ -129,32 +131,32 @@ class MH1DetailVC: UIViewController , UITableViewDataSource, UITableViewDelegate
     //
     //    }
     //ham lam viec
-    //    @objc func classListUpdate2(_ notification: Notification)  {
-    //        let details = notification.userInfo?["details"] as? Person
-    //        item = details
-    //        myTable.reloadData()
-    //
-    //        if let imageView = self.load(fileName: details?.Images ?? "") {
-    //            imgImage.image = imageView as UIImage
-    //        }
-    //
-    //
-    //        //        let cellName =  myTable.cellForRow(at: IndexPath(row: 0, section: 0)) as! CellDetail
-    //        //        cellName.lblName.text = details.Name
-    //        //
-    //        //        let cellPhoneType = myTable.cellForRow(at: IndexPath(row: 1, section: 1)) as! CellDetail
-    //        ////        cellPhoneType.lblPhoneNumber.text = details.PhoneNumber.[cellPhoneType]
-    //        //
-    //        //        let cellEmail =  myTable.cellForRow(at: IndexPath(row: 0, section: 2)) as! CellDetail
-    //        //        cellEmail.lblEmail.text = details.Email
-    //        //
-    //        //        let cellCompany =  myTable.cellForRow(at: IndexPath(row: 0, section: 3)) as! CellDetail
-    //        //        cellCompany.lblCompany.text = details.Company
-    //        //
-    //        //        let celldob =  myTable.cellForRow(at: IndexPath(row: 0, section: 4)) as! CellDetail
-    //        //        celldob.lblDOB.text = details.DateOfBirth
-    //
-    //    }
+        @objc func classListUpdate2(_ notification: Notification)  {
+            let details = notification.userInfo?["details"] as? Person
+            item = details
+            myTable.reloadData()
+    
+            if let imageView = self.load(fileName: details?.image ?? "") {
+                imgImage.image = imageView as UIImage
+            }
+    
+    
+            //        let cellName =  myTable.cellForRow(at: IndexPath(row: 0, section: 0)) as! CellDetail
+            //        cellName.lblName.text = details.Name
+            //
+            //        let cellPhoneType = myTable.cellForRow(at: IndexPath(row: 1, section: 1)) as! CellDetail
+            ////        cellPhoneType.lblPhoneNumber.text = details.PhoneNumber.[cellPhoneType]
+            //
+            //        let cellEmail =  myTable.cellForRow(at: IndexPath(row: 0, section: 2)) as! CellDetail
+            //        cellEmail.lblEmail.text = details.Email
+            //
+            //        let cellCompany =  myTable.cellForRow(at: IndexPath(row: 0, section: 3)) as! CellDetail
+            //        cellCompany.lblCompany.text = details.Company
+            //
+            //        let celldob =  myTable.cellForRow(at: IndexPath(row: 0, section: 4)) as! CellDetail
+            //        celldob.lblDOB.text = details.DateOfBirth
+    
+        }
     
     
     
