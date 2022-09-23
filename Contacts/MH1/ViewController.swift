@@ -32,8 +32,20 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     var tenDict = [String: [Person]]()
     
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let realm = try! Realm()
+        
+//        let phone: <PhoneRow> = <
+//            PhoneRow(value: [phoneType: "aaa", phoneNumber: "" , displayStatus: true]),
+//            PhoneRow(phoneNumber: "", phoneType: "home", displayStatus: false),
+//            PhoneRow(phoneNumber: "", phoneType: "company", displayStatus: false),
+//            PhoneRow(phoneNumber: "", phoneType: "school", displayStatus: false),
+//            PhoneRow(phoneNumber: "", phoneType: "main", displayStatus: false),
+//            PhoneRow(phoneNumber: "", phoneType: "company fax", displayStatus: false)
+//        >
         
         title = "Liên hệ"
         searchBar.delegate = self
@@ -254,6 +266,7 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
             dbManager.deleteItemFromDB(object: person)
             tenDict.removeAll()
             
+            DSTen = dbManager.getDataFromDB()
             for person in DSTen {
                 let prefixName = person.name.prefix(1).lowercased()
                 if (!tenDict.keys.contains(String(prefixName))) {
@@ -262,8 +275,12 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
 
                 tenDict[String(prefixName)]?.append(person)
             }
+            
             searchDS = tenDict
-            myTable.reloadData()
+            //xếp tên theo kí tự    //var sectionTitle = [String]()
+            sectionTitle = searchDS.keys.sorted()
+            sectionTitle.sort()
+            self.myTable.reloadData()
         }
     }
 }
@@ -292,6 +309,7 @@ extension ViewController: UISearchBarDelegate {
             searchDS = searchDS.filter({!$0.value.isEmpty}) //lọc các pt value trong searchDS khi giá trị trong Kiểu Dict bị trống
             //$0: là đối số đầu tiên  của value trong Dict
         }
+        
         sectionTitle = Array(Set(searchDS.compactMap({String($0.key.prefix(1)) } ))) //loại bỏ các phần tử các key- a,b, c...khi bị lặp lại trong mảng key của searchDS
         sectionTitle.sort() // sap xep các chỉ mục theo thứ tự a->z
         myTable.reloadData()

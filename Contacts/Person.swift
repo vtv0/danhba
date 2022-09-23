@@ -28,10 +28,10 @@
 //        self.Images = images
 //        self.Name = name
 //        for item:PhoneRow in phoneNumber {
-//            let currentPhoneRow = self.PhoneNumber.filter({$0.PhoneType == item.PhoneType}).first
+//            let currentPhoneRow = self.PhoneNumber.filter({$0.phoneType == item.phoneType}).first
 //            if currentPhoneRow != nil {
-//                currentPhoneRow?.PhoneNumber = item.PhoneNumber
-//                currentPhoneRow?.DisplayStatus = item.DisplayStatus
+//                currentPhoneRow?.phoneNumber = item.PhoneNumber
+//                currentPhoneRow?.displayStatus = item.DisplayStatus
 //            }
 //        }
 //        
